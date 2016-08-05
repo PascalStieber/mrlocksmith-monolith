@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/faces/main/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+
+		<div class="jumbotron" style="background: #A9D0F5 !important">
+			<!-- Customers Questionnaire -->
+			<div class="row">
+				<h2>
+					Schildern Sie uns ihre Situation <small>Wir kümmern uns um
+						alles Weitere...</small>
+				</h2>
+				<div class="col-md-6 text-right">
+					<div class="btn btn-default">
+						<div class="card">
+							<img class="card-img-top" src="resources/img/icons/close.png"
+								alt="key_available" />
+							<div class="card-block">
+								<h4 class="card-title">Schlüssel vorhanden</h4>
+								<p class="card-text"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 text-left">
+					<div class="btn btn-default">
+						<div class="card">
+							<img class="card-img-top" src="resources/img/icons/close-1.png"
+								alt="key_not_available" />
+							<div class="card-block">
+								<h4 class="card-title">
+									Schlüssel nicht vorhanden <small>oder defekt</small>
+								</h4>
+								<p class="card-text"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-6">
+					<p class="text-right">
+						<button type="button" class="btn btn-default">&laquo;
+							zurück</button>
+					</p>
+				</div>
+				<div class="col-md-6">
+					<p class="text-left">
+						<button type="button" class="btn btn-primary ">weiter
+							&raquo;</button>
+					</p>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-12">
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" aria-valuenow="10"
+							aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%
+							beantwortet</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>
