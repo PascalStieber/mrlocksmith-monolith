@@ -29,12 +29,12 @@
 					<div class="col-md-6 text-left">
 						<div class="btn btn-default">
 							<h:commandLink>
-								<div id="cardChooser" class="card" style="background: #{auftragBean.keyNotAvailable == 'false' ? 'white' : 'blue'};">
-									<h:graphicImage class="card-img-top " id="keyNotAvailable" value="resources/img/icons/close-1.png"
+								<div class="card" >
+									<h:graphicImage class="card-img-top " style="background: #{auftragBean.keyNotAvailable == 'false' ? 'white' : '#A9D0F5'};" id="keyNotAvailable" value="resources/img/icons/close-1.png"
 										alt="keyNotAvailable">
 										<f:param name="keyNotAvailable" value="#{auftragBean.keyNotAvailable}" />
 									</h:graphicImage>
-									<f:ajax id="ajaxKeyNotAvailable" listener="#{auftragBean.changeValueKeyNotAvailable()}" execute="@all" update="cardChooser" />
+									<f:ajax id="ajaxKeyNotAvailable" listener="#{auftragBean.changeValueKeyNotAvailable()}" render="@all" execute="@all" update="@all" />
 
 									<!-- <img class="card-img-top" src="resources/img/icons/close-1.png" alt="key_not_available" /> -->
 									<div class="card-block">
