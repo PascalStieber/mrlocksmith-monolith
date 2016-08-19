@@ -8,29 +8,21 @@ import javax.inject.Named;
 
 @Named
 @SessionScoped
-public class AuftragBean implements Serializable{
+public class AuftragBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private boolean KeyNotAvailable;
 
     @PostConstruct
-    public void init(){
+    public void init() {
 	setKeyNotAvailable(false);
     }
-    
-    
-    
-    public void changeValueKeyNotAvailable(){
-	if (KeyNotAvailable == true){
-	    setKeyNotAvailable(false);
-	}else{
-	    setKeyNotAvailable(true);
-	}
+
+    public void changeValueKeyNotAvailable(boolean pKeyAvailability) {
+	setKeyNotAvailable(pKeyAvailability);
 	System.out.println("growl!" + isKeyNotAvailable());
     }
-    
-    
-    
+
     public boolean isKeyNotAvailable() {
 	return KeyNotAvailable;
     }
@@ -38,6 +30,5 @@ public class AuftragBean implements Serializable{
     public void setKeyNotAvailable(boolean keyNotAvailable) {
 	KeyNotAvailable = keyNotAvailable;
     }
-    
-    
+
 }

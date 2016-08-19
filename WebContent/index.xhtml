@@ -11,41 +11,55 @@
 			<div class="jumbotron" style="background: #A9D0F5 !important">
 				<!-- Customers Questionnaire -->
 				<div class="row">
+					
 					<h2>
 						Schildern Sie uns ihre Situation <small>Wir kümmern uns um alles Weitere...</small>
 					</h2>
 					<div class="col-md-6 text-right">
-						<div class="btn btn-default">
-							<div class="card">
-								<img class="card-img-top" src="resources/img/icons/close.png" alt="key_available" />
-								<div class="card-block">
-									<h4 class="card-title">Schlüssel vorhanden</h4>
-									<p class="card-text"></p>
-								</div>
-							</div>
-						</div>
-					</div>
+						<!--  click feeling -->
+						<h:commandLink>
+							<div class="btn btn-default">
 
-					<div class="col-md-6 text-left">
-						<div class="btn btn-default">
-							<h:commandLink>
-								<div class="card" >
-									<h:graphicImage class="card-img-top " style="background: #{auftragBean.keyNotAvailable == 'false' ? 'white' : '#A9D0F5'};" id="keyNotAvailable" value="resources/img/icons/close-1.png"
-										alt="keyNotAvailable">
-										<f:param name="keyNotAvailable" value="#{auftragBean.keyNotAvailable}" />
-									</h:graphicImage>
-									<f:ajax id="ajaxKeyNotAvailable" listener="#{auftragBean.changeValueKeyNotAvailable()}" render="@all" execute="@all" update="@all" />
+								<div class="card customMRLSMCard">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{auftragBean.keyNotAvailable == 'true' ? 'white' : '#A9D0F5'};">
+										<h:graphicImage class="card-img-top" id="keyAvailable" value="resources/img/icons/close.png" alt="keyNotAvailable">
+											<f:param name="keyNotAvailable" value="#{auftragBean.keyNotAvailable}" />
+										</h:graphicImage>
+										<f:ajax id="ajaxKeyAvailable" listener="#{auftragBean.changeValueKeyNotAvailable(false)}" render="@form" execute="" update="@form" />
 
-									<!-- <img class="card-img-top" src="resources/img/icons/close-1.png" alt="key_not_available" /> -->
+										<!-- 								<img class="card-img-top" src="resources/img/icons/close.png" alt="key_available" /> -->
+									</div>
+
 									<div class="card-block">
-										<h4 class="card-title">
-											Schlüssel nicht vorhanden <small>oder defekt</small>
-										</h4>
+										<h4 class="card-title">Schlüssel vorhanden</h4>
 										<p class="card-text"></p>
 									</div>
 								</div>
-							</h:commandLink>
-						</div>
+							</div>
+						</h:commandLink>
+					</div>
+
+					<div class="col-md-6 text-left">
+
+						<!--  click feeling -->
+						<h:commandLink>
+							<div class="btn btn-default">
+
+								<div class="card customMRLSMCard">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{auftragBean.keyNotAvailable == 'false' ? 'white' : '#A9D0F5'};">
+										<h:graphicImage class="card-img-top" id="keyNotAvailable" value="resources/img/icons/close-1.png" alt="keyNotAvailable">
+											<f:param name="keyNotAvailable" value="#{auftragBean.keyNotAvailable}" />
+										</h:graphicImage>
+									</div>
+									<f:ajax id="ajaxKeyNotAvailable" listener="#{auftragBean.changeValueKeyNotAvailable(true)}" render="@form" execute="" update="@form" />
+									<div class="card-block">
+										<h4 class="card-title">Schlüssel nicht vorhanden</h4>
+										<br /> <small>oder defekt</small>
+										<p class="card-text"></p>
+									</div>
+								</div>
+							</div>
+						</h:commandLink>
 					</div>
 				</div>
 				<br />

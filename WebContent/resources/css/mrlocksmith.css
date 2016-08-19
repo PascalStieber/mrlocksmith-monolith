@@ -1,3 +1,9 @@
-.imageBackground4AuftragButton{
-	background:white;
+.imageBackground4AuftragButton {
+	background: white;
+}
+
+.customMRLSMCard {
+	min-width: 200px;
+	min-height: 230px;
+	margin: auto;
 }
