@@ -9,80 +9,30 @@
 
 		<h:form>
 			<div class="jumbotron" style="background: #A9D0F5 !important">
-				<!-- Customers Questionnaire -->
+				<!-- 				Customers Questionnaire -->
 				<div class="row">
-					
 					<h2>
-						Schildern Sie uns ihre Situation <small>Wir kümmern uns um alles Weitere...</small>
+						Machen Sie den Vergleich und finden Sie den günstigsten Schlüsseldienst Anbieter. <small>Schnell, kostenlos, einfach...</small>
 					</h2>
-					<div class="col-md-6 text-right">
-						<!--  click feeling -->
-						<h:commandLink>
-							<div class="btn btn-default">
-
-								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{auftragBean.keyNotAvailable == 'true' ? 'white' : '#A9D0F5'};">
-										<h:graphicImage class="card-img-top" id="keyAvailable" value="resources/img/icons/close.png" alt="keyNotAvailable">
-											<f:param name="keyNotAvailable" value="#{auftragBean.keyNotAvailable}" />
-										</h:graphicImage>
-										<f:ajax id="ajaxKeyAvailable" listener="#{auftragBean.changeValueKeyNotAvailable(false)}" render="@form" execute="" update="@form" />
-
-										<!-- 								<img class="card-img-top" src="resources/img/icons/close.png" alt="key_available" /> -->
-									</div>
-
-									<div class="card-block">
-										<h4 class="card-title">Schlüssel vorhanden</h4>
-										<p class="card-text"></p>
-									</div>
-								</div>
-							</div>
-						</h:commandLink>
-					</div>
-
-					<div class="col-md-6 text-left">
-
-						<!--  click feeling -->
-						<h:commandLink>
-							<div class="btn btn-default">
-
-								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{auftragBean.keyNotAvailable == 'false' ? 'white' : '#A9D0F5'};">
-										<h:graphicImage class="card-img-top" id="keyNotAvailable" value="resources/img/icons/close-1.png" alt="keyNotAvailable">
-											<f:param name="keyNotAvailable" value="#{auftragBean.keyNotAvailable}" />
-										</h:graphicImage>
-									</div>
-									<f:ajax id="ajaxKeyNotAvailable" listener="#{auftragBean.changeValueKeyNotAvailable(true)}" render="@form" execute="" update="@form" />
-									<div class="card-block">
-										<h4 class="card-title">Schlüssel nicht vorhanden</h4>
-										<br /> <small>oder defekt</small>
-										<p class="card-text"></p>
-									</div>
-								</div>
-							</div>
-						</h:commandLink>
-					</div>
 				</div>
-				<br />
 				<div class="row">
-					<div class="col-md-6">
-						<!-- 					<p class="text-right"> -->
-						<!-- 						<button type="button" class="btn btn-default">&laquo; -->
-						<!-- 							zurück</button> -->
-						<!-- 					</p> -->
-					</div>
-					<div class="col-md-6">
-						<p class="text-left">
-							<button type="button" class="btn btn-primary ">weiter &raquo;</button>
-						</p>
-					</div>
-				</div>
-				<br />
-				<div class="row">
-					<div class="col-md-12">
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25% beantwortet</div>
+					<div class="col-md-8">
+						<h3>Ihr persönliches Angebot ist nur ein paar klicks entfernt. Starten Sie jetzt!</h3>
+						<br />						
+						<br />
+						<br />
+						<div style="text-align:center; align:center;">
+						<h:commandLink action="faces/questionnaire/questionnaire1?faces-redirect=true" value="">
+							<div class="btn btn-primary">Kostenloses Angebot erstellen <span class="glyphicon glyphicon-play"></span></div>
+						</h:commandLink>
 						</div>
 					</div>
+					<div class="col-md-4">
+						<img class="img-circle img-responsive" src="resources/img/keyman.jpg" alt="keyman" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12"></div>
 				</div>
 			</div>
 		</h:form>
