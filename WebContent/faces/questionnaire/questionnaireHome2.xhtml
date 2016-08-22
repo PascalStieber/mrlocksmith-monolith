@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+		<h:form>
+			<div class="jumbotron" style="background: #A9D0F5 !important">
+				<!-- Customers Questionnaire -->
+				<div class="row">
+
+					<h2>
+						Schildern Sie uns ihre Situation <small>Wir kümmern uns um alles Weitere...</small>
+					</h2>
+					<br/><br/>
+					<div class="col-md-6 text-right">
+						<!--  click feeling -->
+						<h:commandLink>
+							<div class="btn btn-default">
+
+								<div class="card customMRLSMCard">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.keyNotAvailable == 'true' ? 'white' : '#A9D0F5'};">
+										<h:graphicImage class="card-img-top" id="keyAvailable" value="/resources/img/icons/close.png" alt="keyNotAvailable">
+											<f:param name="keyNotAvailable" value="#{orderBean.keyNotAvailable}" />
+										</h:graphicImage>
+										<f:ajax id="ajaxKeyAvailable" listener="#{orderBean.setKeyNotAvailable(false)}" render="@form" execute="" update="@form" />
+									</div>
+
+									<div class="card-block">
+										<h4 class="card-title">Schlüssel vorhanden</h4>
+										<p class="card-text"></p>
+									</div>
+								</div>
+							</div>
+						</h:commandLink>
+					</div>
+
+					<div class="col-md-6 text-left">
+
+						<!--  click feeling -->
+						<h:commandLink>
+							<div class="btn btn-default">
+
+								<div class="card customMRLSMCard">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.keyNotAvailable == 'false' ? 'white' : '#A9D0F5'};">
+										<h:graphicImage class="card-img-top" id="keyNotAvailable" value="/resources/img/icons/close-1.png" alt="keyNotAvailable">
+											<f:param name="keyNotAvailable" value="#{orderBean.keyNotAvailable}" />
+										</h:graphicImage>
+									</div>
+									<f:ajax id="ajaxKeyNotAvailable" listener="#{orderBean.setKeyNotAvailable(true)}" render="@form" execute="" update="@form" />
+									<div class="card-block">
+										<h4 class="card-title">
+											Schlüssel nicht vorhanden <br /> <small>oder defekt</small>
+										</h4>
+										<p class="card-text"></p>
+									</div>
+								</div>
+							</div>
+						</h:commandLink>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="pager">
+							<li><a href="./questionnaire1.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-backward"></span> Zurück </a></li>
+							<li><a href="./questionnaireHome3.xhtml?faces-redirect=true"> Weiter <span class="glyphicon glyphicon-forward"></span></a></li>
+						</ul>
+
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 50%">50% beantwortet</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="homeOrCar" value="#{orderBean.homeOrCar}"></f:viewParam>
+			<f:viewParam name="keyNotAvailable" value="#{orderBean.keyNotAvailable}"></f:viewParam>
+			<f:viewParam name="door" value="#{orderBean.door}"></f:viewParam>
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+			<div class="jumbotron" style="background: #A9D0F5 !important">
+				<!-- Customers Questionnaire -->
+				<div class="row">
+
+					<h2>
+						Schildern Sie uns ihre Situation <small>Wir kümmern uns um alles Weitere...</small>
+					</h2>
+					<br /> <br />
+					<div class="col-md-12 text-center">
+						<h:commandLink>
+							<div class="btn btn-default">
+								<div class="card customMRLSMCard">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.express == 'false' ? 'white' : '#A9D0F5'};">
+										<h:graphicImage class="card-img-top" id="express" value="/resources/img/icons/transport-3.png" alt="normal_door">
+											<f:param name="express" value="#{orderBean.express}" />
+										</h:graphicImage>
+										<f:ajax id="express" listener="#{orderBean.changeExpress()}" render="@form" execute="" update="@form" />
+									</div>
+									<div class="card-block">
+										<h4 class="card-title">Express Service</h4>
+										<p class="card-text"></p>
+									</div>
+								</div>
+							</div>
+						</h:commandLink>
+					</div>
+
+				</div>
+				<br />
+				<div class="row"></div>
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="pager">
+							<li><a href="./questionnaireHome3.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-backward"></span> Zurück </a></li>
+							<li><h:link outcome="./userInformation.xhtml" includeViewParams="true"> Weiter <span class="glyphicon glyphicon-forward"></span>
+								</h:link></li>
+						</ul>
+
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75% beantwortet</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>

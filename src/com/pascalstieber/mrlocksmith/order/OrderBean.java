@@ -3,16 +3,14 @@ package com.pascalstieber.mrlocksmith.order;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import com.pascalstieber.mrlocksmith.adress.AdressEntity;
-import com.pascalstieber.mrlocksmith.user.UserBean;
 import com.pascalstieber.mrlocksmith.user.UserEntity;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class OrderBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,16 +23,14 @@ public class OrderBean implements Serializable {
 
     @PostConstruct
     public void init() {
-	setKeyNotAvailable(false);
-	setExpress(false);
-	setHomeOrCar("home");
-	setDoor("normal");
-
 	setUser(new UserEntity());
 	setAdress(new AdressEntity());
-
     }
 
+    public void saveOrder(){
+	
+    }
+       
     public String getHomeOrCarLink() {
 	if ("home".equals(HomeOrCar)) {
 	    return "./questionnaireHome2.xhtml?faces-redirect=true";

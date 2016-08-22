@@ -1,0 +1,11 @@
+# add driver as module
+module add --name=modules.system.layers.base.com.mysql.main --resources=D:\Development_Repos\git\mrlocksmith-monolith\mrlocksmith-monolith/mysql-connector-java-5.1.39-bin.jar --dependencies=javax.api,javax.transaction.api
+
+
+batch
+
+/subsystem=datasources/jdbc-driver=mysql:add(driver-module-name=modules.system.layers.base.com.mysql.main,driver-name=mysql,driver-class-name=com.mysql.jdbc.Driver)
+/subsystem=datasources/data-source=MrLocksmithDS:add(jndi-name=java:jboss/datasources/MrLocksmithDS, driver-name=mysql, connection-url=jdbc:mysql://localhost:3306/MrLocksmithMonolith,user-name=root,password=secret)
+
+run-batch
+:reload

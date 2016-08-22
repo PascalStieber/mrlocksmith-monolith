@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+	
+			<div class="panel panel-primary">
+				<div class="panel-heading">Wir benötigen noch ein paar Informationen zum Einsatzort:</div>
+				<div class="panel-body">
+					<h:form>
+						<div class="form-group">
+							<label for="vorname">Vorname:</label>
+							<h:inputText value="${orderBean.user.firstname}" type="text" class="form-control" id="vorname" />
+							<label for="nachname">Nachname:</label>
+							<h:inputText value="${orderBean.user.surname}" type="text" class="form-control" id="nachname" />
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-9">
+									<label for="strasse">Strasse:</label>
+									<h:inputText value="${orderBean.adress.street}" type="text" class="form-control" id="strasse" />
+								</div>
+								<div class="col-md-3">
+									<label for="hausnummer">Hausnr.:</label>
+									<h:inputText value="${orderBean.adress.streetNumber}" type="text" class="form-control" id="hausnummer" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<label for="plz">PLZ:</label>
+									<h:inputText value="${orderBean.adress.postcode}" type="text" class="form-control" id="plz" />
+								</div>
+								<div class="col-md-8">
+									<label for="ort">Ort:</label>
+									<h:inputText value="${orderBean.adress.country}" type="text" class="form-control" id="ort" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email">Email:</label>
+							<h:inputText value="${orderBean.user.email}" type="email" class="form-control" id="email" />
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-default">Submit</button>
+						</div>
+					</h:form>
+				</div>
+			</div>
+
+</ui:composition>
+
+
+
