@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="MrLocksmithDS">
-<<<<<<< Upstream, based on origin/master
-=======
 		<jta-data-source>java:jboss/datasources/MrLocksmithDS</jta-data-source>
 		<class>com.pascalstieber.mrlocksmith.order.OrderEntity</class>
+		<class>com.pascalstieber.mrlocksmith.user.UserEntity</class>
 
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update"></property>
 			<property name="hibernate.show_sql" value="true"></property>
-			<property name="hibernate.dialect" value="MySQL5Dialect"></property>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"></property>
 		</properties>
 
->>>>>>> 235b76e - wildfly maven integration completet - visual changes in gui - added database facets - exported run_configurations - renamed config.cli to jboss_config.cli
 	</persistence-unit>
 </persistence>

@@ -1,17 +1,18 @@
 package com.pascalstieber.mrlocksmith.order;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 @Stateless
 public class OrderDAO {
-    
-    @Inject
+
+    @PersistenceContext(type = PersistenceContextType.TRANSACTION, unitName = "MrLocksmithDS")
     EntityManager em;
-    
+
     public void saveNewOrder(OrderEntity pOrder){
-//	em.persist(pOrder);
+	em.persist(pOrder);
     }
-    
+
 }

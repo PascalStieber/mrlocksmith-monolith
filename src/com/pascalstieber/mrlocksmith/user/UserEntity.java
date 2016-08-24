@@ -1,7 +1,15 @@
 package com.pascalstieber.mrlocksmith.user;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class UserEntity {
 
+    @Id
+    @GeneratedValue
+    private long id;
     
     private String Firstname;
     private String Surname;

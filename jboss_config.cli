@@ -5,7 +5,7 @@ module add --name=modules.system.layers.base.com.mysql.main --resources=D:\Devel
 batch
 
 /subsystem=datasources/jdbc-driver=mysql:add(driver-module-name=modules.system.layers.base.com.mysql.main,driver-name=mysql,driver-class-name=com.mysql.jdbc.Driver)
-/subsystem=datasources/data-source=MrLocksmithDS:add(jndi-name=java:jboss/datasources/MrLocksmithDS, driver-name=mysql, connection-url=jdbc:mysql://localhost:3306/MrLocksmithMonolith,user-name=root,password=secret)
+/subsystem=datasources/data-source=MrLocksmithDS:add(jndi-name=java:jboss/datasources/MrLocksmithDS, driver-name=mysql, connection-url=jdbc:mysql://localhost:3306/MrLocksmithMonolith,user-name=root,password=Cash##1989)
 
 run-batch
 :reload
