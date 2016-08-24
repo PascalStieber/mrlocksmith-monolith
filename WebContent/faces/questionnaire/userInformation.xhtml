@@ -4,6 +4,16 @@
 
 <ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="metadata">
+		<f:metadata>
+		<f:viewParam name="homeOrCar" value="#{orderBean.homeOrCar}"></f:viewParam>
+		<f:viewParam name="keyNotAvailable" value="#{orderBean.keyNotAvailable}"></f:viewParam>
+		<f:viewParam name="door" value="#{orderBean.door}"></f:viewParam>
+		<f:viewParam name="express" value="#{orderBean.express}"></f:viewParam>
+	</f:metadata>
+	</ui:define>
+
 	<ui:define name="content">
 		<div class="jumbotron" style="background: #A9D0F5 !important">
 			<div class="row">
@@ -17,38 +27,8 @@
 					<ui:include src="/faces/main/userInformationModal.xhtml"></ui:include>
 				</div>
 			</div>
-
-			<div class="row">
-
-				<h:form>
-					<!-- Trigger the modal with a button -->
-					<h:commandButton type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</h:commandButton>
-
-					<!-- Modal -->
-					<div id="myModal" class="modal fade" role="dialog">
-						<div class="modal-dialog">
-
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Modal Header</h4>
-								</div>
-								<div class="modal-body">
-									<p>Some text in the modal.</p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</h:form>
-
-			</div>
-
-
-
-		</div>
+	</div>
+	
+			
 	</ui:define>
 </ui:composition>

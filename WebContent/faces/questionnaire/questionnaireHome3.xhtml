@@ -4,6 +4,13 @@
 
 <ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="homeOrCar" value="#{orderBean.homeOrCar}"></f:viewParam>
+			<f:viewParam name="keyNotAvailable" value="#{orderBean.keyNotAvailable}"></f:viewParam>
+		</f:metadata>
+	</ui:define>
 
 	<ui:define name="content">
 
@@ -15,7 +22,7 @@
 					<h2>
 						Schildern Sie uns ihre Situation <small>Wir kümmern uns um alles Weitere...</small>
 					</h2>
-					<br/><br/>
+					<br /> <br />
 					<div class="col-md-4 text-right">
 						<h:commandLink>
 							<div class="btn btn-default">
@@ -28,7 +35,9 @@
 									</div>
 
 									<div class="card-block">
-										<h4 class="card-title">Holztür <br/><small>kein Sicherheitsschloss </small></h4>
+										<h4 class="card-title">
+											Holztür <br /> <small>kein Sicherheitsschloss </small>
+										</h4>
 										<p class="card-text"></p>
 									</div>
 								</div>
@@ -47,14 +56,16 @@
 										<f:ajax id="iron_door" listener="#{orderBean.setDoor('iron')}" render="@form" execute="" update="@form" />
 									</div>
 									<div class="card-block">
-										<h4 class="card-title">Stahltür <br/><small>oder Sicherheitsschloss </small></h4>
+										<h4 class="card-title">
+											Stahltür <br /> <small>oder Sicherheitsschloss </small>
+										</h4>
 										<p class="card-text"></p>
 									</div>
 								</div>
 							</div>
 						</h:commandLink>
 					</div>
-					
+
 					<div class="col-md-4 text-left">
 						<h:commandLink>
 							<div class="btn btn-default">
@@ -73,17 +84,17 @@
 							</div>
 						</h:commandLink>
 					</div>
-					
+
 				</div>
 				<br />
-				<div class="row">
-				</div>
+				<div class="row"></div>
 				<br />
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="pager">
 							<li><a href="./questionnaireHome2.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-backward"></span> Zurück </a></li>
-							<li><a href="./questionnaireHome4.xhtml?faces-redirect=true"> Weiter <span class="glyphicon glyphicon-forward"></span></a></li>
+							<li><h:link outcome="./questionnaireHome4.xhtml" includeViewParams="true"> Weiter <span class="glyphicon glyphicon-forward"></span>
+								</h:link></li>
 						</ul>
 
 						<div class="progress">

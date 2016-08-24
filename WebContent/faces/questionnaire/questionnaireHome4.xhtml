@@ -5,6 +5,14 @@
 <ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="homeOrCar" value="#{orderBean.homeOrCar}"></f:viewParam>
+			<f:viewParam name="keyNotAvailable" value="#{orderBean.keyNotAvailable}"></f:viewParam>
+			<f:viewParam name="door" value="#{orderBean.door}"></f:viewParam>
+		</f:metadata>
+	</ui:define>
+
 	<ui:define name="content">
 
 		<h:form>
@@ -15,7 +23,7 @@
 					<h2>
 						Schildern Sie uns ihre Situation <small>Wir kümmern uns um alles Weitere...</small>
 					</h2>
-					<br/><br/>
+					<br /> <br />
 					<div class="col-md-12 text-center">
 						<h:commandLink>
 							<div class="btn btn-default">
@@ -34,17 +42,17 @@
 							</div>
 						</h:commandLink>
 					</div>
-					
+
 				</div>
 				<br />
-				<div class="row">
-				</div>
+				<div class="row"></div>
 				<br />
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="pager">
 							<li><a href="./questionnaireHome3.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-backward"></span> Zurück </a></li>
-							<li><a href="./userInformation.xhtml?faces-redirect=true"> Weiter <span class="glyphicon glyphicon-forward"></span></a></li>
+							<li><h:link outcome="./userInformation.xhtml" includeViewParams="true"> Weiter <span class="glyphicon glyphicon-forward"></span>
+								</h:link></li>
 						</ul>
 
 						<div class="progress">

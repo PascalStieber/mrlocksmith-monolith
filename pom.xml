@@ -282,11 +282,6 @@
 			<version>1.1.1.Final</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.39</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<finalName>mrlocksmith-monolith</finalName>
@@ -311,7 +306,7 @@
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>
-				<configuration>  
+				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
@@ -323,10 +318,29 @@
 				<configuration>
 					<execute-commands>
 						<scripts>
-							<script>config.cli</script>
+							<script>jboss_config.cli</script>
 						</scripts>
 					</execute-commands>
 				</configuration>
+				<executions>
+					<execution>
+						<id>startServer</id>
+						<phase>install</phase>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>runningCLICommands</id>
+						<phase>install</phase>
+						<goals>
+							<goal>execute-commands</goal>
+						</goals>
+						<configuration>
+							<jbossHome>D:\Development_Repos\git\mrlocksmith-monolith\mrlocksmith-monolith\target\wildfly-run\wildfly-10.0.0.Final</jbossHome>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
