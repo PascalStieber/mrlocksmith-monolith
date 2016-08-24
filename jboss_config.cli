@@ -1,5 +1,5 @@
 # add driver as module
-module add --name=modules.system.layers.base.com.mysql.main --resources=D:\Development_Repos\git\mrlocksmith-monolith\mrlocksmith-monolith/mysql-connector-java-5.1.39-bin.jar --dependencies=javax.api,javax.transaction.api
+module add --name=modules.system.layers.base.com.mysql.main --resources=D:\Development_Repos\git\mrlocksmith-monolith/mysql-connector-java-5.1.39-bin.jar --dependencies=javax.api,javax.transaction.api
 
 
 batch

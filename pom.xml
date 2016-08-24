@@ -337,7 +337,7 @@
 							<goal>execute-commands</goal>
 						</goals>
 						<configuration>
-							<jbossHome>D:\Development_Repos\git\mrlocksmith-monolith\mrlocksmith-monolith\target\wildfly-run\wildfly-10.0.0.Final</jbossHome>
+							<jbossHome>D:\Development_Repos\git\mrlocksmith-monolith\target\wildfly-run\wildfly-10.0.0.Final</jbossHome>
 						</configuration>
 					</execution>
 				</executions>

@@ -1,9 +1,0 @@
-batch
-
-# add datasource
-data-source add --name=MrLocksmithDS --jndi-name=java:/jdbc/MrLocksmith-MonolithDB --driver-name=mrlocksmith-monolith.war_com.mysql.jdbc.Driver_5_1 --connection-url=jdbc:mysql://127.0.0.1:3306/MrLocksmith-MonolithDB --user-name=PascalStieber --password=secret
-data-source enable --name=MrLocksmithDS 
-
-# Execute and reload
-run-batch
-:reload
