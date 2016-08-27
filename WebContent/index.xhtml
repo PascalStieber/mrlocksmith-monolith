@@ -4,7 +4,6 @@
 
 <ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-
 	<ui:define name="content">
 
 		<h:form>
@@ -15,20 +14,21 @@
 						Machen Sie den Vergleich und finden Sie den günstigsten Schlüsseldienst Anbieter. <small>Schnell, kostenlos, einfach...</small>
 					</h2>
 				</div>
+
 				<div class="row">
 					<div class="col-md-8">
 						<h3>Ihr persönliches Angebot ist nur ein paar klicks entfernt. Starten Sie jetzt!</h3>
-						<br />						
-						<br />
-						<br />
-						<div style="text-align:center; align:center;">
-						<h:commandLink action="faces/questionnaire/questionnaire1?faces-redirect=true" value="">
-							<div class="btn btn-primary btn-lg">Kostenloses Angebot erstellen <span class="glyphicon glyphicon-play"></span></div>
-						</h:commandLink>
+						<br /> <br /> <br />
+						<div style="text-align: center; align: center;">
+							<h:commandLink action="faces/questionnaire/questionnaire1?faces-redirect=true" value="">
+								<div class="btn btn-primary btn-lg">
+									Kostenloses Angebot erstellen <span class="glyphicon glyphicon-play"></span>
+								</div>
+							</h:commandLink>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<img class="img-circle img-responsive" src="resources/img/keyman.jpg" alt="keyman" />
+						<h:graphicImage class="img-circle img-responsive" library="resources" value="/resources/img/keyman.jpg" alt="keyman" />
 					</div>
 				</div>
 				<div class="row">

@@ -1,21 +1,44 @@
 package com.pascalstieber.mrlocksmith.order;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity;
 
 @Entity
-public class OrderEntity {
+public class OrderEntity extends AbstractMRLSEntity{
 
-    @Id
-    @GeneratedValue
-    private long id;
+    private static final long serialVersionUID = 1L;
 
-    public long getId() {
-        return id;
+    private boolean keyNotAvailable;
+    private String homeOrCar = "";
+    private String door = "";
+    private boolean express;
+
+    public boolean isKeyNotAvailable() {
+        return keyNotAvailable;
     }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setKeyNotAvailable(boolean keyNotAvailable) {
+        this.keyNotAvailable = keyNotAvailable;
     }
- 
+    public String getHomeOrCar() {
+        return homeOrCar;
+    }
+    public void setHomeOrCar(String homeOrCar) {
+        this.homeOrCar = homeOrCar;
+    }
+    public String getDoor() {
+        return door;
+    }
+    public void setDoor(String door) {
+        this.door = door;
+    }
+    public boolean isExpress() {
+        return express;
+    }
+    public void setExpress(boolean express) {
+        this.express = express;
+    }
+    
+    
 }

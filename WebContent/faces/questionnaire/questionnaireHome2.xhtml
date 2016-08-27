@@ -7,7 +7,7 @@
 	
 	<ui:define name="metadata">
 		<f:metadata>
-			<f:viewParam name="homeOrCar" value="#{orderBean.homeOrCar}"></f:viewParam>
+			<f:viewParam name="homeOrCar" value="#{orderBean.order.homeOrCar}"></f:viewParam>
 		</f:metadata>
 	</ui:define>
 
@@ -28,11 +28,11 @@
 							<div class="btn btn-default">
 
 								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.keyNotAvailable == 'true' ? 'white' : '#A9D0F5'};">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.keyNotAvailable == 'true' ? 'white' : '#A9D0F5'};">
 										<h:graphicImage class="card-img-top" id="keyAvailable" value="/resources/img/icons/close.png" alt="keyNotAvailable">
-											<f:param name="keyNotAvailable" value="#{orderBean.keyNotAvailable}" />
+											<f:param name="keyNotAvailable" value="#{orderBean.order.keyNotAvailable}" />
 										</h:graphicImage>
-										<f:ajax id="ajaxKeyAvailable" listener="#{orderBean.setKeyNotAvailable(false)}" render="@form" execute="" update="@form" />
+										<f:ajax id="ajaxKeyAvailable" listener="#{orderBean.order.setKeyNotAvailable(false)}" render="@form" execute="" update="@form" />
 									</div>
 
 									<div class="card-block">
@@ -51,12 +51,12 @@
 							<div class="btn btn-default">
 
 								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.keyNotAvailable == 'false' ? 'white' : '#A9D0F5'};">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.keyNotAvailable == 'false' ? 'white' : '#A9D0F5'};">
 										<h:graphicImage class="card-img-top" id="keyNotAvailable" value="/resources/img/icons/close-1.png" alt="keyNotAvailable">
-											<f:param name="keyNotAvailable" value="#{orderBean.keyNotAvailable}" />
+											<f:param name="keyNotAvailable" value="#{orderBean.order.keyNotAvailable}" />
 										</h:graphicImage>
 									</div>
-									<f:ajax id="ajaxKeyNotAvailable" listener="#{orderBean.setKeyNotAvailable(true)}" render="@form" execute="" update="@form" />
+									<f:ajax id="ajaxKeyNotAvailable" listener="#{orderBean.order.setKeyNotAvailable(true)}" render="@form" execute="" update="@form" />
 									<div class="card-block">
 										<h4 class="card-title">
 											Schlüssel nicht vorhanden <br /> <small>oder defekt</small>

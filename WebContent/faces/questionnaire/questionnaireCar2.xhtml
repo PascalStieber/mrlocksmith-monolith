@@ -7,9 +7,9 @@
 
 	<ui:define name="metadata">
 		<f:metadata>
-			<f:viewParam name="homeOrCar" value="#{orderBean.homeOrCar}"></f:viewParam>
-			<f:viewParam name="keyNotAvailable" value="#{orderBean.keyNotAvailable}"></f:viewParam>
-			<f:viewParam name="door" value="#{orderBean.door}"></f:viewParam>
+			<f:viewParam name="homeOrCar" value="#{orderBean.order.homeOrCar}"></f:viewParam>
+			<f:viewParam name="keyNotAvailable" value="#{orderBean.order.keyNotAvailable}"></f:viewParam>
+			<f:viewParam name="door" value="#{orderBean.order.door}"></f:viewParam>
 		</f:metadata>
 	</ui:define>
 
@@ -28,9 +28,9 @@
 						<h:commandLink>
 							<div class="btn btn-default">
 								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.express == 'false' ? 'white' : '#A9D0F5'};">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.express == 'false' ? 'white' : '#A9D0F5'};">
 										<h:graphicImage class="card-img-top" id="express" value="/resources/img/icons/transport-3.png" alt="normal_door">
-											<f:param name="express" value="#{orderBean.express}" />
+											<f:param name="express" value="#{orderBean.order.express}" />
 										</h:graphicImage>
 										<f:ajax id="express" listener="#{orderBean.changeExpress()}" render="@form" execute="" update="@form" />
 									</div>

@@ -7,8 +7,8 @@
 	
 	<ui:define name="metadata">
 		<f:metadata>
-			<f:viewParam name="homeOrCar" value="#{orderBean.homeOrCar}"></f:viewParam>
-			<f:viewParam name="keyNotAvailable" value="#{orderBean.keyNotAvailable}"></f:viewParam>
+			<f:viewParam name="homeOrCar" value="#{orderBean.order.homeOrCar}"></f:viewParam>
+			<f:viewParam name="keyNotAvailable" value="#{orderBean.order.keyNotAvailable}"></f:viewParam>
 		</f:metadata>
 	</ui:define>
 
@@ -27,11 +27,11 @@
 						<h:commandLink>
 							<div class="btn btn-default">
 								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.door == 'wooden' ? '#A9D0F5' : 'white'};">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.door == 'wooden' ? '#A9D0F5' : 'white'};">
 										<h:graphicImage class="card-img-top" id="woodenImage" value="/resources/img/icons/chopped-log.png" alt="wooden_door">
-											<f:param name="door" value="#{orderBean.door}" />
+											<f:param name="door" value="#{orderBean.order.door}" />
 										</h:graphicImage>
-										<f:ajax id="wooden_door" listener="#{orderBean.setDoor('wooden')}" render="@form" execute="" update="@form" />
+										<f:ajax id="wooden_door" listener="#{orderBean.order.setDoor('wooden')}" render="@form" execute="" update="@form" />
 									</div>
 
 									<div class="card-block">
@@ -49,11 +49,11 @@
 						<h:commandLink>
 							<div class="btn btn-default">
 								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.door == 'iron' ? '#A9D0F5' : 'white'};">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.door == 'iron' ? '#A9D0F5' : 'white'};">
 										<h:graphicImage class="card-img-top" id="ironImage" value="/resources/img/icons/iron-man.png" alt="iron_door">
-											<f:param name="door" value="#{orderBean.door}" />
+											<f:param name="door" value="#{orderBean.order.door}" />
 										</h:graphicImage>
-										<f:ajax id="iron_door" listener="#{orderBean.setDoor('iron')}" render="@form" execute="" update="@form" />
+										<f:ajax id="iron_door" listener="#{orderBean.order.setDoor('iron')}" render="@form" execute="" update="@form" />
 									</div>
 									<div class="card-block">
 										<h4 class="card-title">
@@ -70,11 +70,11 @@
 						<h:commandLink>
 							<div class="btn btn-default">
 								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.door == 'normal' ? '#A9D0F5' : 'white'};">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.door == 'normal' ? '#A9D0F5' : 'white'};">
 										<h:graphicImage class="card-img-top" id="normalImage" value="/resources/img/icons/exit-1.png" alt="normal_door">
-											<f:param name="door" value="#{orderBean.door}" />
+											<f:param name="door" value="#{orderBean.order.door}" />
 										</h:graphicImage>
-										<f:ajax id="normal_door" listener="#{orderBean.setDoor('normal')}" render="@form" execute="" update="@form" />
+										<f:ajax id="normal_door" listener="#{orderBean.order.setDoor('normal')}" render="@form" execute="" update="@form" />
 									</div>
 									<div class="card-block">
 										<h4 class="card-title">normale Tür</h4>

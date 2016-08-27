@@ -5,6 +5,7 @@
 <ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
+
 	<ui:define name="content">
 
 		<h:form>
@@ -15,17 +16,18 @@
 					<h2>
 						Schildern Sie uns ihre Situation <small>Wir kümmern uns um alles Weitere...</small>
 					</h2>
-					<br/><br/>
+					<br />
+					<br />
 					<div class="col-md-6 text-right">
 						<!--  click feeling -->
 						<h:commandLink>
 							<div class="btn btn-default">
 								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.homeOrCar.equalsIgnoreCase('car') ? '#A9D0F5':'white' };">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.homeOrCar.equalsIgnoreCase('car') ? '#A9D0F5':'white' };">
 										<h:graphicImage library="resources" class="card-img-top" id="keyAvailable" value="/resources/img/icons/transport-1.png" alt="car">
-											<f:param name="homeOrCar" value="#{orderBean.homeOrCar}" />
+											<f:param name="homeOrCar" value="#{orderBean.order.homeOrCar}" />
 										</h:graphicImage>
-										<f:ajax id="car" listener="#{orderBean.setHomeOrCar('car')}" render="@form" execute="" update="@form" />
+										<f:ajax id="car" listener="#{orderBean.order.setHomeOrCar('car')}" render="@form" execute="" update="@form" />
 									</div>
 
 									<div class="card-block">
@@ -42,14 +44,13 @@
 						<!--  click feeling -->
 						<h:commandLink>
 							<div class="btn btn-default">
-
 								<div class="card customMRLSMCard">
-									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.homeOrCar.equalsIgnoreCase('home') ? '#A9D0F5':'white'};">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.homeOrCar.equalsIgnoreCase('home') ? '#A9D0F5':'white'};">
 										<h:graphicImage library="resources" class="card-img-top" id="house" value="/resources/img/icons/home-2.png" alt="home">
-											<f:param name="homeOrCar" value="#{orderBean.homeOrCar}" />
+											<f:param name="homeOrCar" value="#{orderBean.order.homeOrCar}" />
 										</h:graphicImage>
 									</div>
-									<f:ajax id="home" listener="#{orderBean.setHomeOrCar('home')}" render="@form" execute="" update="@form" />
+									<f:ajax id="home" listener="#{orderBean.order.setHomeOrCar('home')}" render="@form" execute="" update="@form" />
 									<div class="card-block">
 										<h4 class="card-title">
 											Haustür öffnen <br /> <small></small>
@@ -68,13 +69,11 @@
 					<div class="col-md-12">
 						<ul class="pager">
 							<li><a href="../../index.xhtml"><span class="glyphicon glyphicon-backward"></span> Zurück </a></li>
-							<li>
-								<h:link outcome="#{orderBean.getHomeOrCarLink()}" includeViewParams="true"> 
+							<li><h:link outcome="#{orderBean.getHomeOrCarLink()}" includeViewParams="true"> 
 								Weiter 
 								<span class="glyphicon glyphicon-forward"></span>
-								</h:link>
-							</li>
-							</ul>
+								</h:link></li>
+						</ul>
 
 						<div class="progress">
 							<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25% beantwortet</div>

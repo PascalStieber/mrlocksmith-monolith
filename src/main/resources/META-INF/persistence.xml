@@ -2,13 +2,17 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="MrLocksmithDS">
 		<jta-data-source>java:jboss/datasources/MrLocksmithDS</jta-data-source>
+
 		<class>com.pascalstieber.mrlocksmith.order.OrderEntity</class>
 		<class>com.pascalstieber.mrlocksmith.user.UserEntity</class>
+		<class>com.pascalstieber.mrlocksmith.adress.AdressEntity</class>
+		<class>com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity</class>
 
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="update"></property>
+			<property name="hibernate.hbm2ddl.auto" value="create-drop"></property>
 			<property name="hibernate.show_sql" value="true"></property>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"></property>
+			<property name="javax.persistence.validation.mode" value="AUTO" />
 		</properties>
 
 	</persistence-unit>

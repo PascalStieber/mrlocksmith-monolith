@@ -4,21 +4,21 @@
 
 <ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	
+
 	<ui:define name="metadata">
 		<f:metadata>
-		<f:viewParam name="homeOrCar" value="#{orderBean.homeOrCar}"></f:viewParam>
-		<f:viewParam name="keyNotAvailable" value="#{orderBean.keyNotAvailable}"></f:viewParam>
-		<f:viewParam name="door" value="#{orderBean.door}"></f:viewParam>
-		<f:viewParam name="express" value="#{orderBean.express}"></f:viewParam>
-	</f:metadata>
+			<f:viewParam name="homeOrCar" value="#{orderBean.order.homeOrCar}"></f:viewParam>
+			<f:viewParam name="keyNotAvailable" value="#{orderBean.order.keyNotAvailable}"></f:viewParam>
+			<f:viewParam name="door" value="#{orderBean.order.door}"></f:viewParam>
+			<f:viewParam name="express" value="#{orderBean.order.express}"></f:viewParam>
+		</f:metadata>
 	</ui:define>
 
 	<ui:define name="content">
 		<div class="jumbotron" style="background: #A9D0F5 !important">
 			<div class="row">
 				<h2>
-					Schildern Sie uns ihre Situation <small>Wir kümmern uns um alles Weitere...</small>
+					Sie haben es fast geschaft <small>...</small>
 				</h2>
 			</div>
 			<hr />
@@ -27,8 +27,6 @@
 					<ui:include src="/faces/main/userInformationModal.xhtml"></ui:include>
 				</div>
 			</div>
-	</div>
-	
-			
+		</div>
 	</ui:define>
 </ui:composition>

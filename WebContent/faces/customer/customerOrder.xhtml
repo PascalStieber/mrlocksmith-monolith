@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+		<h:form>
+			<div class="jumbotron" style="background: #A9D0F5 !important">
+				<!-- Customers Questionnaire -->
+				<div class="row">
+
+					<h2>
+						Ihr Auftrag wurde abgeschickt. <small>Sie erhalten in wenigen Sekunden Ihre Angebote...</small>
+					</h2>
+					<br /> <br />
+					<div class="col-md-12 text-center">
+						<h2>Wir haben folgende Angebote für Sie erhalten:</h2>
+						<p><small>*(Alle Angebote beziehen sich auf Ihre zuvor gemachten Angaben.)</small></p>
+						<table class="table table-striped text-left">
+							<thead>
+								<tr>
+									<th>Firstname</th>
+									<th>Lastname</th>
+									<th>Email</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>John</td>
+									<td>Doe</td>
+									<td>john@example.com</td>
+								</tr>
+								<tr>
+									<td>Mary</td>
+									<td>Moe</td>
+									<td>mary@example.com</td>
+								</tr>
+								<tr>
+									<td>July</td>
+									<td>Dooley</td>
+									<td>july@example.com</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
