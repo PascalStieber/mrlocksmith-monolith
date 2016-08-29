@@ -1,9 +1,10 @@
 package com.pascalstieber.mrlocksmith.order;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
+import javax.persistence.ManyToOne;
 
 import com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity;
+import com.pascalstieber.mrlocksmith.user.UserEntity;
 
 @Entity
 public class OrderEntity extends AbstractMRLSEntity{
@@ -15,6 +16,15 @@ public class OrderEntity extends AbstractMRLSEntity{
     private String door = "";
     private boolean express;
 
+    @ManyToOne
+    private UserEntity user;
+    
+    public UserEntity getUser() {
+        return user;
+    }
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
     public boolean isKeyNotAvailable() {
         return keyNotAvailable;
     }

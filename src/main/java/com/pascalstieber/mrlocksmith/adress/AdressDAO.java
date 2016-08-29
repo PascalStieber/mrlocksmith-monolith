@@ -15,4 +15,8 @@ public class AdressDAO {
 	em.persist(pAdress);
     }
 
+    public void updateAdress(AdressEntity pAdress){
+	em.merge(pAdress);
+    }
+    
 }

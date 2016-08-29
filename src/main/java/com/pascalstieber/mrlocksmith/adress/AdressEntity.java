@@ -1,12 +1,17 @@
 package com.pascalstieber.mrlocksmith.adress;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity;
+import com.pascalstieber.mrlocksmith.user.UserEntity;
 
 @Entity
 public class AdressEntity extends AbstractMRLSEntity {
@@ -24,6 +29,17 @@ public class AdressEntity extends AbstractMRLSEntity {
     @NotEmpty(message="Straﬂe ist ein erforderliches Feld!")
     private String street;
     
+    @ManyToMany(mappedBy="adresses")
+    private Set<UserEntity> user = new HashSet<UserEntity>();
+   
+    public Set<UserEntity> getUser() {
+        return user;
+    }
+
+    public void addUser(UserEntity user) {
+        this.user.add(user);
+    }
+
     private String streetNumber;
     
     public String getStreet() {

@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import com.pascalstieber.mrlocksmith.adress.AdressDAO;
 import com.pascalstieber.mrlocksmith.adress.AdressEntity;
+import com.pascalstieber.mrlocksmith.user.UserDAO;
 import com.pascalstieber.mrlocksmith.user.UserEntity;
 
 @Named
@@ -26,7 +27,9 @@ public class OrderBean implements Serializable {
     @Inject
     private OrderDAO orderDAO;
     @Inject
-    private AdressDAO adressDao;
+    private AdressDAO adressDAO;
+    @Inject
+    private UserDAO userDAO;
     
     
     @PostConstruct
@@ -37,10 +40,24 @@ public class OrderBean implements Serializable {
     }
 
     public String saveOrder(){
-	System.out.println("order.id = " + order.getId() );
-//	OrderDAO.saveNewOrder(Order);
-	System.out.println("order.id = " + order.getId() );
-//	AdressDao.saveNewAdress(Adress);
+	orderDAO.saveNewOrder(order);
+	adressDAO.saveNewAdress(adress);
+	userDAO.saveNewUser(user);
+
+	//füllen der n:m Beziehungstabelle	
+	adress.addUser(user);
+	user.addAdress(adress);
+	
+	//order an user anhängen
+	user.addOrder(order);
+	order.setUser(user);
+	
+	//änderungen persistieren
+	userDAO.updateUser(user);
+	adressDAO.updateAdress(adress);
+	orderDAO.updateOrder(order);
+	
+	
 	return "/faces/customer/customerOrder.xhtml?faces-redirect=true";
     }
        
@@ -74,22 +91,6 @@ public class OrderBean implements Serializable {
 
     public void setAdress(AdressEntity adress) {
 	this.adress = adress;
-    }
-
-    public OrderDAO getOrderDAO() {
-	return orderDAO;
-    }
-
-    public void setOrderDAO(OrderDAO orderDAO) {
-	this.orderDAO = orderDAO;
-    }
-
-    public AdressDAO getAdressDao() {
-	return adressDao;
-    }
-
-    public void setAdressDao(AdressDAO adressDao) {
-	this.adressDao = adressDao;
     }
 
     public OrderEntity getOrder() {
