@@ -18,15 +18,15 @@ public class AdressEntity extends AbstractMRLSEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @NotEmpty(message="PLZ ist ein erforderliches Feld!")
+    @NotEmpty(message="PLZ darf nicht leer sein!")
     @DecimalMax(value="999999")
     @DecimalMin(value="1111")
     private String postcode;
     
-    @NotEmpty(message="Ort ist ein erforderliches Feld!")
+    @NotEmpty(message="Ort darf nicht leer sein!")
     private String country;
 
-    @NotEmpty(message="Straﬂe ist ein erforderliches Feld!")
+    @NotEmpty(message="Straﬂe darf nicht leer sein!")
     private String street;
     
     @ManyToMany(mappedBy="adresses")

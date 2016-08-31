@@ -14,23 +14,23 @@ import com.pascalstieber.mrlocksmith.adress.AdressEntity;
 
 @Stateless
 public class UserDAO {
-    
+
     @PersistenceContext(type = PersistenceContextType.TRANSACTION, unitName = "MrLocksmithDS")
     EntityManager em;
 
-    public void saveNewUser(UserEntity pUser){
+    public void saveNewUser(UserEntity pUser) {
 	em.persist(pUser);
     }
-    
-    public void updateUser(UserEntity pUser){
+
+    public void updateUser(UserEntity pUser) {
 	em.merge(pUser);
     }
-    
-    public List<UserEntity> fetchAllUsers(){
+
+    public List<UserEntity> fetchAllUsers() {
 	EntityGraph<UserEntity> userEntityGraph = em.createEntityGraph(UserEntity.class);
-//	userEntityGrap.addAttributeNodes("id");
+	// userEntityGrap.addAttributeNodes("id");
 	Subgraph<AdressEntity> adressGraph = userEntityGraph.addSubgraph("adresses", AdressEntity.class);
-//	adressGraph.addAttributeNodes("name");
+	// adressGraph.addAttributeNodes("name");
 
 	Query q = em.createQuery("SELECT u FROM UserEntity u");
 	q.setHint("javax.persistence.fetchgraph", userEntityGraph);
@@ -39,5 +39,4 @@ public class UserDAO {
 	return result;
     }
 
-    
 }

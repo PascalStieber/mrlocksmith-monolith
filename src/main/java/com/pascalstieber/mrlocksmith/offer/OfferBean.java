@@ -1,8 +1,9 @@
 package com.pascalstieber.mrlocksmith.offer;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -17,24 +18,45 @@ import com.pascalstieber.mrlocksmith.order.OrderEntity;
 public class OfferBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private HashSet<OrderEntity> allOrders;
+    private List<OrderEntity> allOrders;
+    private Long orderID;
+    private OrderEntity order;
     
     @Inject
     private OrderDAO orderDAO;
     
-    public HashSet<OrderEntity> fetchAllOrders(){
-	return null;
-	
+    
+    @PostConstruct
+    private void init(){
+	setOrder(new OrderEntity());
     }
     
-    
-    public HashSet<OrderEntity> getAllOrders() {
-	return null;
-//	return fetchAllOrders();
-	
+
+    public List<OrderEntity> getAllOrders() {
+	return orderDAO.fetchAllOrders();
     }
-    public void setAllOrders(HashSet<OrderEntity> allOrders) {
+
+    public void setAllOrders(List<OrderEntity> allOrders) {
 	this.allOrders = allOrders;
     }
+    
+    public OrderEntity getOrder() {
+	return order;
+    }
+
+    public void setOrder(OrderEntity order) {
+	this.order = order;
+    }
+
+    public Long getOrderID() {
+	return orderID;
+    }
+
+    public void setOrderID(Long orderID) {
+	this.orderID = orderID;
+    }
+    
+    
+    
     
 }

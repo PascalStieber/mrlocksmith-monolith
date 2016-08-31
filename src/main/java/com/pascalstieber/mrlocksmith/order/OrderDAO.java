@@ -10,6 +10,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
+import javax.persistence.Subgraph;
+
+import com.pascalstieber.mrlocksmith.adress.AdressEntity;
+import com.pascalstieber.mrlocksmith.user.UserEntity;
 
 @Stateless
 public class OrderDAO {
@@ -25,30 +30,18 @@ public class OrderDAO {
 	em.merge(pOrder);
     }
 
-    public OrderEntity fetchOrder(OrderEntity pOrder) {
-	EntityGraph<OrderEntity> entityGraph = em.createEntityGraph(OrderEntity.class);
-	entityGraph.addAttributeNodes("addresses");
-
-	Map<String, Object> hints = new HashMap<String, Object>();
-	hints.put("javax.persistence.fetchgraph", entityGraph);
-	OrderEntity order = em.find(OrderEntity.class, pOrder.getId(), hints);
-
-	EntityManagerFactory factory = em.getEntityManagerFactory();
-	factory.addNamedEntityGraph("user.adresses", entityGraph);	
-	return order;
-    }
-    
-    
     public List<OrderEntity> fetchAllOrders() {
-//	EntityGraph<OrderEntity> entityGraph = em.createEntityGraph(OrderEntity.class);
-//	entityGraph.addAttributeNodes("addresses");
-//	
-//	Map<String, Object> hints = new HashMap<String, Object>();
-//	hints.put("javax.persistence.fetchgraph", entityGraph);
-//	OrderEntity order = em.find(OrderEntity.class, pOrder.getId(), hints);
-//
-//	EntityManagerFactory factory = em.getEntityManagerFactory();
-//	factory.addNamedEntityGraph("user.adresses", entityGraph);	
-	return null;
+	EntityGraph<OrderEntity> orderGraph = em.createEntityGraph(OrderEntity.class);
+	// userEntityGrap.addAttributeNodes("id");
+	Subgraph<UserEntity> userGraph = orderGraph.addSubgraph("user", UserEntity.class);
+	Subgraph<AdressEntity> adressGraph = userGraph.addSubgraph("adresses", AdressEntity.class);
+	
+	Query q = em.createQuery("SELECT o FROM OrderEntity o");
+	q.setHint("javax.persistence.fetchgraph", orderGraph);
+	q.setHint("javax.persistence.loadgraph", orderGraph);
+	List<OrderEntity> result = q.getResultList();
+	return result;
     }
+
+
 }

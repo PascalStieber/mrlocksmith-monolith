@@ -21,18 +21,9 @@ public class UserBean implements Serializable {
     @Inject
     private UserDAO userDAO;
     
-    @PostConstruct
-    private void init(){
-	fetchAllUsers();
-    }
-
-    public void fetchAllUsers() {
-	System.out.println("fetchAllUsers() wurde aufgerufen");
-	allUsers = userDAO.fetchAllUsers();
-    }
 
     public List<UserEntity> getAllUsers(){
-	return this.allUsers;
+	return userDAO.fetchAllUsers();
     }
     
     public void setAllUsers(List<UserEntity> allUsers) {

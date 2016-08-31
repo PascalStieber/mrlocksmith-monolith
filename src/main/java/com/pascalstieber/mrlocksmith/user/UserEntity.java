@@ -22,10 +22,10 @@ import com.pascalstieber.mrlocksmith.order.OrderEntity;
 public class UserEntity extends AbstractMRLSEntity {
 
     private static final long serialVersionUID = -4625542971441659206L;
-    @NotEmpty
+    @NotEmpty(message="Vorname darf nicht leer sein!")
     @Size(min=2, max=20, message="Der Vorname muss min. 3 und darf max. 20 Zeichen lang sein.")
     private String firstname;
-    @NotEmpty
+    @NotEmpty(message="Nachname darf nicht leer sein!")
     @Size(min=2, max=30, message="Der Nachname muss min. 3 und darf max. 30 Zeichen lang sein.")
     private String surname;
      

@@ -58,7 +58,7 @@ public class OrderBean implements Serializable {
 	orderDAO.updateOrder(order);
 	
 	
-	return "/faces/customer/customerOrder.xhtml?faces-redirect=true";
+	return "/faces/customer/showCustomersOffers.xhtml";
     }
        
     public String getHomeOrCarLink() {
