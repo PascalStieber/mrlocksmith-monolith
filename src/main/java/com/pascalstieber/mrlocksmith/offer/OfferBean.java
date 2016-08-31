@@ -31,6 +31,9 @@ public class OfferBean implements Serializable {
 	setOrder(new OrderEntity());
     }
     
+    public void printSomething(){
+	System.out.println("println Hallo");
+    }
 
     public List<OrderEntity> getAllOrders() {
 	return orderDAO.fetchAllOrders();
@@ -55,8 +58,5 @@ public class OfferBean implements Serializable {
     public void setOrderID(Long orderID) {
 	this.orderID = orderID;
     }
-    
-    
-    
     
 }
