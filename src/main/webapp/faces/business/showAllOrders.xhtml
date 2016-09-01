@@ -4,7 +4,6 @@
 
 <ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-
 	<ui:define name="content">
 
 
@@ -17,16 +16,15 @@
 						<p>
 							<small>*(Alle Aufträge beziehen sich auf die gemachten Angaben der Kunden und sind ohne gewähr.)</small>
 						</p>
-						
+
 						<h:dataTable value="#{offerBean.allOrders}" var="order" class="table table-striped text-left">
 							<h:column>
 								<f:facet name="header">Auftragsnummer:</f:facet>#{order.id}
 							</h:column>
 							<h:column>
 								<f:facet name="header">Zu öffnen ist:</f:facet>
-								<h:graphicImage library="resources" rendered="#{order.homeOrCar.equals('home')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/home-2.png" alt="car" />
-								
-								<h:graphicImage library="resources" rendered="#{order.homeOrCar.equals('car')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/transport-1.png" alt="car" />
+								<h:graphicImage library="resources" rendered="#{order.homeOrCar.equals('home')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/home-2.png" alt="Haustür" />
+								<h:graphicImage library="resources" rendered="#{order.homeOrCar.equals('car')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/transport-1.png" alt="Auto" />
 							</h:column>
 							<h:column>
 								<f:facet name="header">Schlüssel vorhanden:</f:facet>
@@ -34,21 +32,19 @@
 							</h:column>
 							<h:column>
 								<f:facet name="header">Tür ist aus:</f:facet>
-								<h:graphicImage library="resources" rendered="#{order.door.equals('iron')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/iron-man.png" alt="car" />
-								<h:graphicImage library="resources" rendered="#{order.door.equals('wooden')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/chopped-log.png" alt="car" />
-								<h:graphicImage library="resources" rendered="#{order.door.equals('normal')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/exit-1.png" alt="car" />
+								<h:graphicImage library="resources" rendered="#{order.door.equals('iron')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/iron-man.png" alt="Stahl" />
+								<h:graphicImage library="resources" rendered="#{order.door.equals('wooden')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/chopped-log.png" alt="Holz" />
+								<h:graphicImage library="resources" rendered="#{order.door.equals('normal')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/exit-1.png" alt="Normal" />
 							</h:column>
 							<h:column>
 								<f:facet name="header">Express erwünscht:</f:facet>
-
 								<span class="#{order.express ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'}"></span>
-
 							</h:column>
 							<h:column>
 								<f:facet name="header">Adresse</f:facet>
-								<h:dataTable value="#{order.user.adresses}" var="adress" class="table table-striped text-left">
+								<h:dataTable value="#{order.adress}" var="adress" class="table table-striped text-left">
 									<h:column>
-										<f:facet name="header">Sraße / Hausnr.: </f:facet>#{adress.street} #{adress.streetNumber}  
+										<f:facet name="header">Sraße / Hausnr.: </f:facet>#{adress.street} #{adress.streetnumber}  
 			    					</h:column>
 									<h:column>
 										<f:facet name="header">PLZ / Ort</f:facet>#{adress.postcode} #{adress.country}
@@ -57,7 +53,10 @@
 							</h:column>
 							<h:column>
 								<f:facet name="header">Aktionen:</f:facet>
-								<h:commandButton class="btn btn-primary btn-xs" action="#{offerBean.printSomething()}" value="Angebot abgeben" />
+								<h:link class="btn btn-primary btn-xs" outcome="./submitTender.xhtml" value="Angebot abgeben">
+									<f:param name="orderID" value="#{order.id}"></f:param>
+								</h:link>
+								
 								<h:commandButton class="btn btn-info btn-xs" value="Angebot bearbeiten" />
 							</h:column>
 						</h:dataTable>

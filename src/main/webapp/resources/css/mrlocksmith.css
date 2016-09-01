@@ -12,3 +12,7 @@
 	max-width: 50%;
 	max-height: 50%;
 }
+
+.colOrder1 { width: 20%; }
+.colOrder2 { width: 30%; }
+.colOrder3 { width: 50%; }

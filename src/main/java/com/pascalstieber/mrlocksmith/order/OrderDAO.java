@@ -43,5 +43,10 @@ public class OrderDAO {
 	return result;
     }
 
+    public OrderEntity fetchOrderByID(Long pOrderid) {
+	OrderEntity order = em.find(OrderEntity.class, pOrderid);
+	return order;
+    }
+
 
 }

@@ -14,7 +14,8 @@
 				<div class="row">
 
 					<h2>
-						Schildern Sie uns ihre Situation <small>Wir kümmern uns um alles Weitere...</small>
+						Schritt 1 von 5: Welche Türe lässt sich nicht öffnen?<br/>
+						<small></small>
 					</h2>
 					<br /> <br />
 					<div class="col-md-6 text-right">
@@ -24,7 +25,6 @@
 								<div class="card customMRLSMCard">
 									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.homeOrCar.equalsIgnoreCase('car') ? '#A9D0F5':'white' };">
 										<h:graphicImage library="resources" class="card-img-top" id="keyAvailable" value="/resources/img/icons/transport-1.png" alt="car">
-											<f:param name="homeOrCar" value="#{orderBean.order.homeOrCar}" />
 										</h:graphicImage>
 										<f:ajax id="car" listener="#{orderBean.order.setHomeOrCar('car')}" render="@form" execute="" update="@form" />
 									</div>
@@ -46,7 +46,6 @@
 								<div class="card customMRLSMCard">
 									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.homeOrCar.equalsIgnoreCase('home') ? '#A9D0F5':'white'};">
 										<h:graphicImage library="resources" class="card-img-top" id="house" value="/resources/img/icons/home-2.png" alt="home">
-											<f:param name="homeOrCar" value="#{orderBean.order.homeOrCar}" />
 										</h:graphicImage>
 									</div>
 									<f:ajax id="home" listener="#{orderBean.order.setHomeOrCar('home')}" render="@form" execute="" update="@form" />

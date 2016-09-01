@@ -1,4 +1,4 @@
-package com.pascalstieber.mrlocksmith.user;
+package com.pascalstieber.mrlocksmith.contractor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,10 +16,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.pascalstieber.mrlocksmith.adress.AdressEntity;
 import com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity;
-import com.pascalstieber.mrlocksmith.order.OrderEntity;
+import com.pascalstieber.mrlocksmith.offer.OfferEntity;
 
 @Entity
-public class UserEntity extends AbstractMRLSEntity {
+public class ContractorEntity extends AbstractMRLSEntity {
 
     private static final long serialVersionUID = -4625542971441659206L;
     @NotEmpty(message="Vorname darf nicht leer sein!")
@@ -36,18 +36,18 @@ public class UserEntity extends AbstractMRLSEntity {
     private String phonenumber;
     
     @ManyToMany(cascade = CascadeType.ALL,targetEntity=AdressEntity.class)
-    @JoinTable(name="User_Adress")
+    @JoinTable(name="Contractor_Adress")
     private Set<AdressEntity> adresses = new HashSet<>();
     
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.LAZY)
-    private Set<OrderEntity> orders = new HashSet<>();
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="contractor", fetch = FetchType.LAZY)
+    private Set<OfferEntity> offers = new HashSet<>();
     
     
-    public Set<OrderEntity> getOrders() {
-        return orders;
+    public Set<OfferEntity> getOffers() {
+        return offers;
     }
-    public void addOrder(OrderEntity order) {
-        this.orders.add(order);
+    public void addOffer(OfferEntity offer) {
+        this.offers.add(offer);
     }
     public Set<AdressEntity> getAdresses() {
         return adresses;

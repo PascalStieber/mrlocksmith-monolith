@@ -5,7 +5,10 @@
 
 		<class>com.pascalstieber.mrlocksmith.order.OrderEntity</class>
 		<class>com.pascalstieber.mrlocksmith.user.UserEntity</class>
+		<class>com.pascalstieber.mrlocksmith.contractor.ContractorEntity</class>
 		<class>com.pascalstieber.mrlocksmith.adress.AdressEntity</class>
+		<class>com.pascalstieber.mrlocksmith.item.ItemEntity</class>
+		<class>com.pascalstieber.mrlocksmith.offer.OfferEntity</class>
 		<class>com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity</class>
 
 		<properties>

@@ -1,13 +1,21 @@
 package com.pascalstieber.mrlocksmith.order;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.pascalstieber.mrlocksmith.adress.AdressEntity;
 import com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity;
+import com.pascalstieber.mrlocksmith.offer.OfferEntity;
 import com.pascalstieber.mrlocksmith.user.UserEntity;
 
 @Entity
-public class OrderEntity extends AbstractMRLSEntity{
+public class OrderEntity extends AbstractMRLSEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,37 +26,67 @@ public class OrderEntity extends AbstractMRLSEntity{
 
     @ManyToOne
     private UserEntity user;
-    
+
+    @ManyToOne
+    private AdressEntity adress;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
+    private Set<OfferEntity> offers = new HashSet<>();
+
+    public Set<OfferEntity> getOffers() {
+	return offers;
+    }
+
+    public void addOffer(OfferEntity offer) {
+	this.offers.add(offer);
+    }
+
     public UserEntity getUser() {
-        return user;
+	return user;
     }
+
     public void setUser(UserEntity user) {
-        this.user = user;
+	this.user = user;
     }
+
     public boolean isKeyNotAvailable() {
-        return keyNotAvailable;
+	return keyNotAvailable;
     }
+
     public void setKeyNotAvailable(boolean keyNotAvailable) {
-        this.keyNotAvailable = keyNotAvailable;
+	this.keyNotAvailable = keyNotAvailable;
     }
+
     public String getHomeOrCar() {
-        return homeOrCar;
+	return homeOrCar;
     }
+
     public void setHomeOrCar(String homeOrCar) {
-        this.homeOrCar = homeOrCar;
+	this.homeOrCar = homeOrCar;
     }
+
     public String getDoor() {
-        return door;
+	return door;
     }
+
     public void setDoor(String door) {
-        this.door = door;
+	this.door = door;
     }
+
     public boolean isExpress() {
-        return express;
+	return express;
     }
+
     public void setExpress(boolean express) {
-        this.express = express;
+	this.express = express;
     }
-    
-    
+
+    public AdressEntity getAdress() {
+	return adress;
+    }
+
+    public void setAdress(AdressEntity adress) {
+	this.adress = adress;
+    }
+
 }

@@ -40,6 +40,9 @@ public class OrderBean implements Serializable {
     }
 
     public String saveOrder(){
+	
+	//@TODO: dieser ganze krampf ist vllt. gar nicht nötig, würde man die cascadierung richtig einschalten...
+	
 	orderDAO.saveNewOrder(order);
 	adressDAO.saveNewAdress(adress);
 	userDAO.saveNewUser(user);
@@ -51,6 +54,11 @@ public class OrderBean implements Serializable {
 	//order an user anhängen
 	user.addOrder(order);
 	order.setUser(user);
+	
+	//order an adresse anhängen
+	order.setAdress(adress);
+	adress.addOrder(order);
+	
 	
 	//änderungen persistieren
 	userDAO.updateUser(user);

@@ -3,14 +3,18 @@ package com.pascalstieber.mrlocksmith.adress;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity;
+import com.pascalstieber.mrlocksmith.order.OrderEntity;
 import com.pascalstieber.mrlocksmith.user.UserEntity;
 
 @Entity
@@ -28,10 +32,24 @@ public class AdressEntity extends AbstractMRLSEntity {
 
     @NotEmpty(message="Straﬂe darf nicht leer sein!")
     private String street;
+
+    @NotEmpty(message="Hausnr. ist ein erforderliches Feld")
+    private String streetnumber;
     
     @ManyToMany(mappedBy="adresses")
     private Set<UserEntity> user = new HashSet<UserEntity>();
    
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="adress", fetch = FetchType.LAZY)
+    private Set<OrderEntity> orders = new HashSet<>();
+    
+    public Set<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void addOrder(OrderEntity order) {
+        this.orders.add(order);
+    }
+
     public Set<UserEntity> getUser() {
         return user;
     }
@@ -40,8 +58,6 @@ public class AdressEntity extends AbstractMRLSEntity {
         this.user.add(user);
     }
 
-    private String streetNumber;
-    
     public String getStreet() {
         return street;
     }
@@ -66,12 +82,12 @@ public class AdressEntity extends AbstractMRLSEntity {
         this.street = street;
     }
 
-    public String getStreetNumber() {
-	return streetNumber;
+    public String getStreetnumber() {
+	return streetnumber;
     }
 
-    public void setStreetNumber(String streetNumber) {
-	this.streetNumber = streetNumber;
+    public void setStreetnumber(String streetnumber) {
+	this.streetnumber = streetnumber;
     }
 
 
