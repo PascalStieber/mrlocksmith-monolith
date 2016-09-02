@@ -42,6 +42,7 @@ public class OrderDAO {
 	// tiefen EntityGraphen zu haben. Dazu gibt es bspw. auch ein JPA Jira
 	// Ticket: https://java.net/jira/browse/JPA_SPEC-96
 	Query q = em.createQuery("SELECT DISTINCT o FROM OrderEntity o GROUP BY o.id");
+//	Query q = em.createQuery("SELECT o FROM OrderEntity o");
 	q.setHint("javax.persistence.fetchgraph", orderGraph);
 	q.setHint("javax.persistence.loadgraph", orderGraph);
 	List<OrderEntity> result = q.getResultList();

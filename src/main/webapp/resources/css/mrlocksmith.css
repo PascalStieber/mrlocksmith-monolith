@@ -16,3 +16,10 @@
 .colOrder1 { width: 20%; }
 .colOrder2 { width: 30%; }
 .colOrder3 { width: 50%; }
+
+.colOffer1 { max-width: 10%; }
+.colOffer2 { width: 25%; }
+.colOffer3 { width: 65%; }
+
+.colItem1 { width: 60%; }
+.colItem2 { width: 40%; }
