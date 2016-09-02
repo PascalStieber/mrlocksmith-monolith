@@ -22,4 +22,55 @@
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Production</param-value>
 	</context-param>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Admin Realm</web-resource-name>
+			<url-pattern>/faces/customer/*</url-pattern>
+			<url-pattern>/faces/contractor/*</url-pattern>
+			<url-pattern>/faces/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Contractor Realm</web-resource-name>
+			<url-pattern>/faces/contractor/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Contractor</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Customer Realm</web-resource-name>
+			<url-pattern>/faces/customer/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Customer</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>Authentication Form</realm-name>
+		<form-login-config>
+			<form-login-page>/faces/main/login.xhtml</form-login-page>
+			<form-error-page>/faces/main/loginError.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+	
+	<security-role>
+		<role-name>Admin</role-name>
+	</security-role>
+	<security-role>
+		<role-name>Contractor</role-name>
+	</security-role>
+	<security-role>
+		<role-name>Customer</role-name>
+	</security-role>
 </web-app>

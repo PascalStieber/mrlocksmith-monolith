@@ -7,5 +7,21 @@ batch
 /subsystem=datasources/jdbc-driver=mysql:add(driver-module-name=modules.system.layers.base.com.mysql.main,driver-name=mysql,driver-class-name=com.mysql.jdbc.Driver)
 /subsystem=datasources/data-source=MrLocksmithDS:add(jndi-name=java:jboss/datasources/MrLocksmithDS, driver-name=mysql, connection-url=jdbc:mysql://localhost:3306/MrLocksmithMonolith,user-name=root,password=Cash##1989)
 
+# new security domain
+/subsystem=security/security-domain=MRLSSecurityDomain:add(cache-type=default)
+/subsystem=security/security-domain=MRLSSecurityDomain/authentication=classic:add(login-modules=[{"code"=>"Database","flag"=>"required","module-options"=>[("dsJndiName"=>"java:jboss/datasources/MrLocksmithDS"),("principalsQuery"=>"SELECT password FROM userentity WHERE email=?"),("rolesQuery"=>"SELECT role, 'Roles' FROM userentity WHERE email=?")]}]
+
+# set security domain as default
+/subsystem=ejb3/:write-attribute(name=default-security-domain,value=MRLSSecurityDomain)
+
+
+# set logging for jaas security 
+/subsystem=logging/logger=org.jboss.security:add(category=org.jboss.security,level=ALL)
+/subsystem=logging/logger=org.jboss.web.tomcat.security:add(category=org.jboss.web.tomcat.security,level=ALL)
+/subsystem=logging/logger=org.apache.catalina:add(category=org.apache.catalina,level=ALL)
+
+# change default console logger from info to trace
+/subsystem=logging/console-handler=CONSOLE:write-attribute(name=level,value=TRACE)
+
 run-batch
 :reload

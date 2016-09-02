@@ -1,10 +1,13 @@
 package com.pascalstieber.mrlocksmith.order;
 
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.SessionContext;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -39,9 +42,10 @@ public class OrderBean implements Serializable {
 	setUser(new UserEntity());
 	setAdress(new AdressEntity());
 	setOrder(new OrderEntity());
-
 	allOrders = orderDAO.fetchAllOrders();
-	
+//	scheiße, das war ja einfach :-D
+	Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+	System.out.println(principal.toString());
     }
 
     public void fetchSelectedOrder() {
@@ -52,10 +56,8 @@ public class OrderBean implements Serializable {
     }
 
     public String saveOrder() {
-
 	// @TODO: dieser ganze krampf ist vllt. gar nicht nötig, würde man die
 	// cascadierung richtig benutzen...
-
 	orderDAO.saveNewOrder(order);
 	adressDAO.saveNewAdress(adress);
 	userDAO.saveNewUser(user);
@@ -77,7 +79,7 @@ public class OrderBean implements Serializable {
 	adressDAO.updateAdress(adress);
 	orderDAO.updateOrder(order);
 
-	return "/faces/customer/showCustomersOffers.xhtml";
+	return "/faces/customer/showCustomersOffers.xhtml?faces-redirect=true";
     }
 
     public String getHomeOrCarLink() {

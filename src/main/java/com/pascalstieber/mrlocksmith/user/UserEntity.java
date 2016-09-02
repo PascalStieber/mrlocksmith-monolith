@@ -42,6 +42,8 @@ public class UserEntity extends AbstractMRLSEntity {
     @OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.LAZY)
     private Set<OrderEntity> orders = new HashSet<>();
     
+    private String password;
+    private String role;
     
     public Set<OrderEntity> getOrders() {
         return orders;
@@ -78,6 +80,18 @@ public class UserEntity extends AbstractMRLSEntity {
     }
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
+    }
+    public String getRole() {
+	return role;
+    }
+    public void setRole(String role) {
+	this.role = role;
+    }
+    public String getPassword() {
+	return password;
+    }
+    public void setPassword(String password) {
+	this.password = password;
     }
    
 

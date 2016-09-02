@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.pascalstieber.mrlocksmith.adress.AdressEntity;
 import com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity;
@@ -31,6 +32,7 @@ public class OrderEntity extends AbstractMRLSEntity {
     private AdressEntity adress;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
+    @OrderBy("id DESC")
     private Set<OfferEntity> offers = new HashSet<>();
 
     public Set<OfferEntity> getOffers() {
