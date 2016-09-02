@@ -2,6 +2,7 @@ package com.pascalstieber.mrlocksmith.item;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -21,6 +22,7 @@ public class ItemEntity extends AbstractMRLSEntity {
     // @TODO: hier muss ein Pattern zur Überprüfung der Währung erstellt werden.
     // Der Datentyp sollte geändert werden.
     @NotEmpty(message = "Vergeben Sie für den Posten einen Namen und einen Betrag.")
+    @Pattern(regexp = "^[0-9]*[.][0-9][0-9]", message="Betrag muss im Format '00.00' sein")
     private String value;
 
     public OfferEntity getOffer() {

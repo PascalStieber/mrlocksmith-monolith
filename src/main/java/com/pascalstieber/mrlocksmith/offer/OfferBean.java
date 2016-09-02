@@ -22,7 +22,6 @@ public class OfferBean implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<OrderEntity> allOrders;
     private Long orderID;
-
     private OrderEntity order;
     private OfferEntity offer;
 
@@ -35,10 +34,9 @@ public class OfferBean implements Serializable {
 
     @PostConstruct
     private void init() {
-	OfferEntity newOffer = new OfferEntity();
-	offer = newOffer;
+	setOffer(new OfferEntity());
     }
-
+    
     public void addItemToOffer() {
 	ItemEntity item = new ItemEntity();
 	item.setOffer(offer);
@@ -48,6 +46,13 @@ public class OfferBean implements Serializable {
 	// erstellte Item auf der GUI immer unten erscheint.
     }
 
+    public void fetchSelectedOrder() {
+	if (orderID != null) {
+	    order = orderDAO.fetchOrderByID(orderID);
+	    System.out.println("fetched with " + orderID);
+	}
+    }
+    
     public String saveOffer() {
 	offerDAO.saveNewOffer(offer);
 	return "showAllOrders.xhtml?faces-redirect=true";
@@ -62,9 +67,6 @@ public class OfferBean implements Serializable {
     }
 
     public OrderEntity getOrder() {
-	if (this.orderID != null) {
-	    order = orderDAO.fetchOrderByID(this.orderID);
-	}
 	return order;
     }
 

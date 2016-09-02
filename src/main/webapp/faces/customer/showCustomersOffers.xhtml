@@ -5,51 +5,111 @@
 <ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="content">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="orderID" value="#{offerBean.orderID}"></f:viewParam>
+			<f:event type="preRenderView" listener="#{offerBean.fetchSelectedOrder()}" />
+		</f:metadata>
+	</ui:define>
 
+
+	<ui:define name="content">
 		<h:form>
 			<div class="jumbotron" style="background: #A9D0F5 !important">
 				<!-- Customers Questionnaire -->
 				<div class="row">
-
-					<h2>
-						Ihr Auftrag wurde abgeschickt. <small>Sie erhalten in wenigen Sekunden Ihre Angebote...</small>
-					</h2>
-					<br /> <br />
 					<div class="col-md-12 text-center">
-						<h2>Wir haben folgende Angebote für Sie erhalten:</h2>
-						<p><small>*(Alle Angebote beziehen sich auf Ihre zuvor gemachten Angaben.)</small></p>
-						<table class="table table-striped text-left">
-							<thead>
-								<tr>
-									<th>Firstname</th>
-									<th>Lastname</th>
-									<th>Email</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>John</td>
-									<td>Doe</td>
-									<td>john@example.com</td>
-								</tr>
-								<tr>
-									<td>Mary</td>
-									<td>Moe</td>
-									<td>mary@example.com</td>
-								</tr>
-								<tr>
-									<td>July</td>
-									<td>Dooley</td>
-									<td>july@example.com</td>
-								</tr>
-							</tbody>
-						</table>
+						<h2>Ihre letzten 5 Anfragen:</h2>
+						<small></small>
+
+						<ui:repeat value="#{orderBean.allOrders}" var="order">
+							<div class="row">
+								<div class="col-md-4 text-center">
+									<div class="panel panel-default">
+										<div class="panel-heading">Der Auftrag ##{order.id} im Überblick:</div>
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-md-6">
+													<label for="vorname">Vorname:</label>
+													<h:outputText value="#{order.user.firstname}" id="vorname" />
+												</div>
+												<div class="col-md-6">
+													<label for="nachname">Nachname:</label>
+													<h:outputText value="#{order.user.surname}" id="nachname" />
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<label for="email">Email:</label>
+													<h:outputText value="#{order.user.email}" id="email" />
+												</div>
+												<div class="col-md-6">
+													<label for="telefonnummer">Telefonnummer:</label>
+													<h:outputText value="#{order.user.phonenumber}" id="telefonnummer" />
+												</div>
+											</div>
+											<hr />
+											<div class="row">
+												<div class="col-md-6">
+													<label for="strasse">Strasse:</label>
+													<h:outputText value="#{order.adress.street}" id="strasse" />
+												</div>
+												<div class="col-md-6">
+													<label for="hausnummer">Hausnr.:</label>
+													<h:outputText value="#{order.adress.streetnumber}" id="hausnummer" />
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<label for="plz">PLZ:</label>
+													<h:outputText value="#{order.adress.postcode}" id="plz" />
+												</div>
+												<div class="col-md-6">
+													<label for="ort">Ort:</label>
+													<h:outputText value="#{order.adress.country}" id="ort" />
+												</div>
+											</div>
+											<hr />
+											<div class="row">
+												<div class="col-md-6">
+													<label>Zu öffnen ist eine:</label>
+													<h:outputText rendered="#{order.homeOrCar.equals('home')}" value="Haustür" />
+													<h:outputText rendered="#{order.homeOrCar.equals('car')}" value="Autotür" />
+												</div>
+												<div class="col-md-6">
+													<label>Tür ist aus:</label>
+													<h:outputText rendered="#{order.door.equals('iron')}" value="Stahl" />
+													<h:outputText rendered="#{order.door.equals('wooden')}" value="Holz" />
+													<h:outputText rendered="#{order.door.equals('normal')}" value="Normal / k.A." />
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<label>Schlüssel vorhanden:</label> <span class="#{order.keyNotAvailable ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok'}"></span>
+												</div>
+												<div class="col-md-6">
+													<label>Express erwünscht: </label> <span class="#{order.express ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'}"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-8 text-center">
+									<h:dataTable value="#{order.offers}" var="offer" class="table table-striped text-left">
+										<h:column>
+											<f:facet name="header">Angebotsnummer:</f:facet>#{offer.id}
+									</h:column>
+										<h:column>
+											<f:facet name="header">Gesamtbetrag:</f:facet>
+										 Total: #{offer.items.stream().map(item->item.value).sum()} €
+									</h:column>
+									</h:dataTable>
+								</div>
+							</div>
+						</ui:repeat>
 					</div>
 				</div>
 			</div>
 		</h:form>
-
-
 	</ui:define>
 </ui:composition>

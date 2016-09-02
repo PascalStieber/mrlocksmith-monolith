@@ -1,6 +1,7 @@
 package com.pascalstieber.mrlocksmith.order;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -18,57 +19,67 @@ import com.pascalstieber.mrlocksmith.user.UserEntity;
 @ManagedBean
 public class OrderBean implements Serializable {
 
-
-    private static final long serialVersionUID = -6117050496377964413L;
+    private static final long serialVersionUID = 1L;
     private UserEntity user;
     private AdressEntity adress;
     private OrderEntity order;
-    
+    private Long orderID;
+
+    private List<OrderEntity> allOrders;
+
     @Inject
     private OrderDAO orderDAO;
     @Inject
     private AdressDAO adressDAO;
     @Inject
     private UserDAO userDAO;
-    
-    
+
     @PostConstruct
     public void init() {
 	setUser(new UserEntity());
 	setAdress(new AdressEntity());
 	setOrder(new OrderEntity());
+
+	allOrders = orderDAO.fetchAllOrders();
+	
     }
 
-    public String saveOrder(){
-	
-	//@TODO: dieser ganze krampf ist vllt. gar nicht nötig, würde man die cascadierung richtig einschalten...
-	
+    public void fetchSelectedOrder() {
+	if (orderID != null) {
+	    order = orderDAO.fetchOrderByID(orderID);
+	    System.out.println("fetched with " + orderID);
+	}
+    }
+
+    public String saveOrder() {
+
+	// @TODO: dieser ganze krampf ist vllt. gar nicht nötig, würde man die
+	// cascadierung richtig benutzen...
+
 	orderDAO.saveNewOrder(order);
 	adressDAO.saveNewAdress(adress);
 	userDAO.saveNewUser(user);
 
-	//füllen der n:m Beziehungstabelle	
+	// füllen der n:m Beziehungstabelle
 	adress.addUser(user);
 	user.addAdress(adress);
-	
-	//order an user anhängen
+
+	// order an user anhängen
 	user.addOrder(order);
 	order.setUser(user);
-	
-	//order an adresse anhängen
+
+	// order an adresse anhängen
 	order.setAdress(adress);
 	adress.addOrder(order);
-	
-	
-	//änderungen persistieren
+
+	// änderungen persistieren
 	userDAO.updateUser(user);
 	adressDAO.updateAdress(adress);
 	orderDAO.updateOrder(order);
-	
-	
+
 	return "/faces/customer/showCustomersOffers.xhtml";
     }
-       
+
     public String getHomeOrCarLink() {
 	if ("home".equals(order.getHomeOrCar())) {
 	    return "./questionnaireHome2.xhtml?faces-redirect=true";
@@ -102,13 +113,27 @@ public class OrderBean implements Serializable {
     }
 
     public OrderEntity getOrder() {
-        return order;
+	return order;
     }
 
     public void setOrder(OrderEntity order) {
-        this.order = order;
+	this.order = order;
     }
 
- 
+    public List<OrderEntity> getAllOrders() {
+	return allOrders;
+    }
+
+    public void setAllOrders(List<OrderEntity> allOrders) {
+	this.allOrders = allOrders;
+    }
+
+    public Long getOrderID() {
+	return orderID;
+    }
+
+    public void setOrderID(Long orderID) {
+	this.orderID = orderID;
+    }
 
 }

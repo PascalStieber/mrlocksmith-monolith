@@ -8,6 +8,7 @@
 	<ui:define name="metadata">
 		<f:metadata>
 			<f:viewParam name="orderID" value="#{offerBean.orderID}"></f:viewParam>
+			<f:event type="preRenderView" listener="#{offerBean.fetchSelectedOrder()}" />
 		</f:metadata>
 	</ui:define>
 
@@ -16,99 +17,9 @@
 			<div class="jumbotron" style="background: #A9D0F5 !important">
 				<!-- Customers Questionnaire -->
 				<div class="row">
-					<div class="col-md-6 text-left">
-						<div class="panel panel-default">
-							<div class="panel-heading">Der Auftrag ##{offerBean.order.id} im Überblick:</div>
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-md-6">
-										<label for="vorname">Vorname:</label>
-										<h:outputText value="#{offerBean.order.user.firstname}" id="vorname" />
-									</div>
-									<div class="col-md-6">
-										<label for="nachname">Nachname:</label>
-										<h:outputText value="#{offerBean.order.user.surname}" id="nachname" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<label for="email">Email:</label>
-										<h:outputText value="#{offerBean.order.user.email}" id="email" />
-									</div>
-									<div class="col-md-6">
-										<label for="telefonnummer">Telefonnummer:</label>
-										<h:outputText value="#{offerBean.order.user.phonenumber}" id="telefonnummer" />
-									</div>
-								</div>
-								<hr />
-								<div class="row">
-									<div class="col-md-6">
-										<label for="strasse">Strasse:</label>
-										<h:outputText value="#{offerBean.order.adress.street}" id="strasse" />
-									</div>
-									<div class="col-md-6">
-										<label for="hausnummer">Hausnr.:</label>
-										<h:outputText value="#{offerBean.order.adress.streetnumber}" id="hausnummer" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<label for="plz">PLZ:</label>
-										<h:outputText value="#{offerBean.order.adress.postcode}" id="plz" />
-									</div>
-									<div class="col-md-6">
-										<label for="ort">Ort:</label>
-										<h:outputText value="#{offerBean.order.adress.country}" id="ort" />
-									</div>
-								</div>
-								<hr />
-								<div class="row">
-									<div class="col-md-6">
-										<label>Zu öffnen ist eine:</label>
-										<h:outputText rendered="#{offerBean.order.homeOrCar.equals('home')}" value="Haustür" />
-										<h:outputText rendered="#{offerBean.order.homeOrCar.equals('car')}" value="Autotür" />
-									</div>
-									<div class="col-md-6">
-										<label>Tür ist aus:</label>
-										<h:outputText rendered="#{offerBean.order.door.equals('iron')}" value="Stahl" />
-										<h:outputText rendered="#{offerBean.order.door.equals('wooden')}" value="Holz" />
-										<h:outputText rendered="#{offerBean.order.door.equals('normal')}" value="Normal / k.A." />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<label>Schlüssel vorhanden:</label> <span class="#{offerBean.order.keyNotAvailable ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok'}"></span>
-									</div>
-									<div class="col-md-6">
-										<label>Express erwünscht: </label> <span class="#{offerBean.order.express ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'}"></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<ui:include src="./createOfferPanel.xhtml"></ui:include>
+					<ui:include src="./showOfferOverviewPanel.xhtml"></ui:include>
 
-					<div class="col-md-6 text-left">
-						<div class="panel panel-default">
-							<div class="panel-heading">Ihr Angebot:</div>
-							<div class="panel-body">
-							<h:messages class="alert alert-danger" />
-								<h:dataTable value="#{offerBean.offer.items}" var="item" class="table text-left">
-									<h:column class="colOrder1">
-										<f:facet name="header">Posten:</f:facet>
-										<h:inputText value="#{item.name}" class="form-control" />
-									</h:column>
-									<h:column class="colOrder2">
-										<f:facet name="header">Betrag:</f:facet>
-										<h:inputText value="#{item.value}" class="form-control" />
-									</h:column>
-									<h:column class="colOrder3">
-									</h:column>
-								</h:dataTable>
-								<h:commandButton value="+" class="btn btn-info btn-xs" action="#{offerBean.addItemToOffer()}" /> <br/>
-								<h:commandButton class="btn btn-success" action="#{offerBean.saveOffer()}" value="Angebot absenden!" />
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</h:form>

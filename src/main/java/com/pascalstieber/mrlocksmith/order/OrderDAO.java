@@ -1,19 +1,18 @@
 package com.pascalstieber.mrlocksmith.order;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import javax.persistence.Subgraph;
 
 import com.pascalstieber.mrlocksmith.adress.AdressEntity;
+import com.pascalstieber.mrlocksmith.item.ItemEntity;
+import com.pascalstieber.mrlocksmith.offer.OfferEntity;
 import com.pascalstieber.mrlocksmith.user.UserEntity;
 
 @Stateless
@@ -35,8 +34,14 @@ public class OrderDAO {
 	// userEntityGrap.addAttributeNodes("id");
 	Subgraph<UserEntity> userGraph = orderGraph.addSubgraph("user", UserEntity.class);
 	Subgraph<AdressEntity> adressGraph = userGraph.addSubgraph("adresses", AdressEntity.class);
-	
-	Query q = em.createQuery("SELECT o FROM OrderEntity o");
+	Subgraph<OfferEntity> offerGraph = orderGraph.addSubgraph("offers", OfferEntity.class);
+	Subgraph<ItemEntity> itemGraph = offerGraph.addSubgraph("items", ItemEntity.class);
+
+	// Das DISTINCT ist nötig, um keine redundanten Daten des orderGraphs
+	// als result zu erhalten. Dieses Problem scheint seinen Ursprung in dem
+	// tiefen EntityGraphen zu haben. Dazu gibt es bspw. auch ein JPA Jira
+	// Ticket: https://java.net/jira/browse/JPA_SPEC-96
+	Query q = em.createQuery("SELECT DISTINCT o FROM OrderEntity o GROUP BY o.id");
 	q.setHint("javax.persistence.fetchgraph", orderGraph);
 	q.setHint("javax.persistence.loadgraph", orderGraph);
 	List<OrderEntity> result = q.getResultList();
@@ -47,6 +52,5 @@ public class OrderDAO {
 	OrderEntity order = em.find(OrderEntity.class, pOrderid);
 	return order;
     }
-
 
 }

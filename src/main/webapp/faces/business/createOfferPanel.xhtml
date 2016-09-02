@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+	<div class="col-md-6 text-left">
+		<div class="panel panel-default">
+			<div class="panel-heading">Ihr Angebot:</div>
+			<div class="panel-body">
+				<h:messages class="alert alert-danger" />
+				<h:dataTable value="#{offerBean.offer.items}" var="item" class="table text-left">
+					<h:column class="colOrder1">
+						<f:facet name="header">Posten:</f:facet>
+						<h:inputText value="#{item.name}" class="form-control" />
+					</h:column>
+					<h:column class="colOrder2">
+						<f:facet name="header">Betrag:</f:facet>
+						<h:inputText value="#{item.value}" class="form-control" />
+					</h:column>
+					<h:column class="colOrder3">
+					</h:column>
+				</h:dataTable>
+				<h:commandButton value="+" class="btn btn-info btn-xs" action="#{offerBean.addItemToOffer()}" />
+				<br />
+				<h:commandButton class="btn btn-success" action="#{offerBean.saveOffer()}" value="Angebot absenden!" />
+			</div>
+		</div>
+	</div>
+</ui:composition>
