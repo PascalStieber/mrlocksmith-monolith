@@ -1,19 +1,19 @@
 package com.pascalstieber.mrlocksmith.order;
 
 import java.io.Serializable;
-import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.SessionContext;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.pascalstieber.mrlocksmith.adress.AdressDAO;
 import com.pascalstieber.mrlocksmith.adress.AdressEntity;
+import com.pascalstieber.mrlocksmith.offer.OfferDAO;
+import com.pascalstieber.mrlocksmith.offer.OfferEntity;
 import com.pascalstieber.mrlocksmith.user.UserDAO;
 import com.pascalstieber.mrlocksmith.user.UserEntity;
 
@@ -36,16 +36,15 @@ public class OrderBean implements Serializable {
     private AdressDAO adressDAO;
     @Inject
     private UserDAO userDAO;
+    @Inject
+    private OfferDAO offerDAO;
 
     @PostConstruct
     public void init() {
-	setUser(new UserEntity());
-	setAdress(new AdressEntity());
-	setOrder(new OrderEntity());
+	user = new UserEntity();
+	adress = new AdressEntity();
+	order = new OrderEntity();
 	allOrders = orderDAO.fetchAllOrders();
-//	scheiße, das war ja einfach :-D
-	Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
-	System.out.println(principal.toString());
     }
 
     public void fetchSelectedOrder() {
@@ -54,12 +53,38 @@ public class OrderBean implements Serializable {
 	    System.out.println("fetched with " + orderID);
 	}
     }
+    
+    public boolean isOneOfferInOrderAlreadyAccepted(OrderEntity pOrder){
+	for (OfferEntity offer : pOrder.getOffers()) {
+	    if(offer.isAccepted()){
+		return true;
+	    }
+	}
+	return false;
+    }
+
+    public void accept(OfferEntity pOffer) {
+	// Das Offer Object, welches in diese Methode als Parameter aus der JSF
+	// .xhtml View übergeben wurde ist über den orderEntityGraph in die
+	// Seite gelangt. Es scheint, als dass diese Objekte nicht am
+	// EntityManager attached sind. Daher ist das Offer Object über
+	// fetchOfferByID(pOffer.getId()) an den EntityManager zu attachen,
+	// bevor es gespeichert werden kann.
+
+	OfferEntity offerToAccept = offerDAO.fetchOfferByID(pOffer.getId());
+	offerToAccept.setAccepted(true);
+	offerToAccept.setAcceptedAt(new Date());
+	offerDAO.updateOffer(offerToAccept);
+	allOrders = orderDAO.fetchAllOrders();
+    }
 
     public String saveOrder() {
 	// @TODO: dieser ganze krampf ist vllt. gar nicht nötig, würde man die
 	// cascadierung richtig benutzen...
 	orderDAO.saveNewOrder(order);
 	adressDAO.saveNewAdress(adress);
+
+	user.setRole("Customer");
 	userDAO.saveNewUser(user);
 
 	// füllen der n:m Beziehungstabelle

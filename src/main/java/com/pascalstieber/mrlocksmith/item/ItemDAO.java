@@ -5,6 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
+import com.pascalstieber.mrlocksmith.offer.OfferEntity;
+
 @Stateless
 public class ItemDAO {
 
@@ -19,7 +21,14 @@ public class ItemDAO {
 	em.merge(pItem);
     }
 
+    public void deleteItem(ItemEntity pItem){
+	em.remove(pItem);
+    }
     
+    public ItemEntity fetchItemByID(Long pItem) {
+	ItemEntity item = em.find(ItemEntity.class, pItem);
+	return item;
+    }
 
 
 }

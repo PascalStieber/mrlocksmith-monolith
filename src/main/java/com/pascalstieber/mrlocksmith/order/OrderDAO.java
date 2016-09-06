@@ -1,5 +1,6 @@
 package com.pascalstieber.mrlocksmith.order;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import javax.persistence.Subgraph;
+import javax.persistence.TypedQuery;
 
 import com.pascalstieber.mrlocksmith.adress.AdressEntity;
 import com.pascalstieber.mrlocksmith.item.ItemEntity;
@@ -22,11 +24,13 @@ public class OrderDAO {
     EntityManager em;
 
     public void saveNewOrder(OrderEntity pOrder) {
+	pOrder.setCreatedAt(new Date());
 	em.persist(pOrder);
     }
 
     public void updateOrder(OrderEntity pOrder) {
 	em.merge(pOrder);
+	em.flush();
     }
 
     public List<OrderEntity> fetchAllOrders() {
@@ -42,7 +46,6 @@ public class OrderDAO {
 	// tiefen EntityGraphen zu haben. Dazu gibt es bspw. auch ein JPA Jira
 	// Ticket: https://java.net/jira/browse/JPA_SPEC-96
 	Query q = em.createQuery("SELECT DISTINCT o FROM OrderEntity o GROUP BY o.id");
-//	Query q = em.createQuery("SELECT o FROM OrderEntity o");
 	q.setHint("javax.persistence.fetchgraph", orderGraph);
 	q.setHint("javax.persistence.loadgraph", orderGraph);
 	List<OrderEntity> result = q.getResultList();
@@ -50,8 +53,22 @@ public class OrderDAO {
     }
 
     public OrderEntity fetchOrderByID(Long pOrderid) {
-	OrderEntity order = em.find(OrderEntity.class, pOrderid);
-	return order;
+	EntityGraph<OrderEntity> orderGraph = em.createEntityGraph(OrderEntity.class);
+	Subgraph<OfferEntity> offerGraph = orderGraph.addSubgraph("offers", OfferEntity.class);
+	Subgraph<ItemEntity> itemGraph = offerGraph.addSubgraph("items", ItemEntity.class);
+	
+	TypedQuery<OrderEntity> q = em.createQuery("SELECT DISTINCT o FROM OrderEntity o WHERE o.id = :orderid", OrderEntity.class);
+	q.setHint("javax.persistence.fetchgraph", orderGraph);
+	q.setHint("javax.persistence.loadgraph", orderGraph);
+	q.setParameter("orderid", pOrderid);
+	
+	return q.getResultList().get(0);
+    }
+
+    public Long fetchOrderAmount() {
+	Query query = em.createQuery(" SELECT COUNT(o) FROM OrderEntity o");
+	Long results = (Long) query.getResultList().get(0);
+	return results;
     }
 
 }

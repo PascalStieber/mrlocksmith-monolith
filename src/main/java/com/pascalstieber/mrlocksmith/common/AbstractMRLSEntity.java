@@ -1,6 +1,7 @@
 package com.pascalstieber.mrlocksmith.common;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,13 +14,26 @@ public abstract class AbstractMRLSEntity implements Serializable {
     
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
-    public long getId() {
+    private Date createdAt;
+    
+    
+    public Long getId() {
 	return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
 	this.id = id;
     }
+    
+    public Date getCreatedAt() {
+	return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+	this.createdAt = createdAt;
+    }
+
+    
 }

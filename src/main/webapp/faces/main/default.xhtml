@@ -16,28 +16,30 @@
 	<h:outputStylesheet name="css/mrlocksmith.css" />
 </h:head>
 <h:body>
-	
+
 	<f:view>
 
-<!-- 	<h:outputScript library="resources" name="websocket.js" /> -->
+		<!-- 	<h:outputScript library="resources" name="websocket.js" /> -->
 		<ui:insert name="metadata" />
 
 		<div class="container" style="width: 80%;">
-
-			<!-- Header -->
-			<div class="row page-header">
-				<div class="col-md-4">
-					<h:graphicImage library="resources" value="/resources/img/mrlocksmith_logo.jpg" class="" alt="locksmith_logo" />
+			<h:form>
+				<!-- Header -->
+				<div class="row page-header">
+					<div class="col-md-4">
+						<h:graphicImage library="resources" value="/resources/img/mrlocksmith_logo.jpg" class="" alt="locksmith_logo" />
+					</div>
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<p class="text-center">
+							<span class="glyphicon glyphicon-thumbs-up"></span> <a href="#">Ratgeber</a> | <span class="glyphicon glyphicon-comment"></span> <a href="#">Kontakt</a> | <span
+								class="glyphicon glyphicon-log-in"></span> <a href="#">Mein Zugang</a> | <span class="glyphicon glyphicon-user"></span>
+							<h:commandLink value="Registrierung" action="/faces/main/register.xhtml?faces-redirect=true" />
+						</p><br/>
+						<p class="text-center"> Sie sind angemeldet als: #{statisticBean.getLoggedInUsername()}</p>
+					</div>
 				</div>
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
-					<p class="text-center">
-						<span class="glyphicon glyphicon-thumbs-up"></span> <a href="#">Ratgeber</a> | <span class="glyphicon glyphicon-comment"></span> <a href="#">Kontakt</a> | <span
-							class="glyphicon glyphicon-log-in"></span> <a href="#">Mein Zugang</a> | <span class="glyphicon glyphicon-user"></span> <a href="#">Regristrierung</a>
-					</p>
-				</div>
-			</div>
-
+			</h:form>
 			<div id="content">
 				<ui:insert name="content"></ui:insert>
 				<ui:insert name="login"></ui:insert>

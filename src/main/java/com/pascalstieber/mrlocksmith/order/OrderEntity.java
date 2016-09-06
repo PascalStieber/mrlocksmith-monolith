@@ -20,9 +20,9 @@ public class OrderEntity extends AbstractMRLSEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private boolean keyNotAvailable;
-    private String homeOrCar = "";
-    private String door = "";
+    private boolean keyNotAvailable = false;
+    private String homeOrCar = "home";
+    private String door = "normal";
     private boolean express;
 
     @ManyToOne
@@ -34,7 +34,7 @@ public class OrderEntity extends AbstractMRLSEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
     @OrderBy("id DESC")
     private Set<OfferEntity> offers = new HashSet<>();
-
+    
     public Set<OfferEntity> getOffers() {
 	return offers;
     }

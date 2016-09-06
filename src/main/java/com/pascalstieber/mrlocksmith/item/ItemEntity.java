@@ -17,12 +17,11 @@ public class ItemEntity extends AbstractMRLSEntity {
     @ManyToOne
     private OfferEntity offer;
 
-    @NotEmpty(message = "Vergeben Sie für den Posten einen Namen und einen Betrag.")
+    // Die Validierungen wurden in die GUI verlegt. Somit ist es möglich, Items
+    // anzulegen und zu persistieren um sie dann auf der Maske als "Leerzeile"
+    // anzeigen lassen zu können. Durch die Hibernate Validerung wäre das so
+    // nicht möglich gewesen.
     private String name;
-    // @TODO: hier muss ein Pattern zur Überprüfung der Währung erstellt werden.
-    // Der Datentyp sollte geändert werden.
-    @NotEmpty(message = "Vergeben Sie für den Posten einen Namen und einen Betrag.")
-    @Pattern(regexp = "^[0-9]*[.][0-9][0-9]", message="Betrag muss im Format '00.00' sein")
     private String value;
 
     public OfferEntity getOffer() {

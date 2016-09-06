@@ -9,6 +9,7 @@
 		<f:metadata>
 			<f:viewParam name="orderID" value="#{offerBean.orderID}"></f:viewParam>
 			<f:event type="preRenderView" listener="#{offerBean.fetchSelectedOrder()}" />
+			<f:event type="preRenderView" listener="#{offerBean.fetchOfferIfExists()}" />
 		</f:metadata>
 	</ui:define>
 
@@ -18,7 +19,7 @@
 				<!-- Customers Questionnaire -->
 				<div class="row">
 					<ui:include src="./createOfferPanel.xhtml"></ui:include>
-					<ui:include src="./showOfferOverviewPanel.xhtml"></ui:include>
+					<ui:include src="./showOrderOverviewPanel.xhtml"></ui:include>
 
 				</div>
 			</div>

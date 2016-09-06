@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -19,9 +21,10 @@ import com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity;
 import com.pascalstieber.mrlocksmith.order.OrderEntity;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UserEntity extends AbstractMRLSEntity {
 
-    private static final long serialVersionUID = -4625542971441659206L;
+    private static final long serialVersionUID = 1L;
     @NotEmpty(message="Vorname darf nicht leer sein!")
     @Size(min=2, max=20, message="Der Vorname muss min. 3 und darf max. 20 Zeichen lang sein.")
     private String firstname;
@@ -42,6 +45,7 @@ public class UserEntity extends AbstractMRLSEntity {
     @OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.LAZY)
     private Set<OrderEntity> orders = new HashSet<>();
     
+    @NotEmpty(message="Passwort darf nicht leer sein!")
     private String password;
     private String role;
     

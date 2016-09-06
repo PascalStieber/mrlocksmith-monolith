@@ -10,9 +10,9 @@
 				<!-- Customers Questionnaire -->
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<h2>Folgende Aufträge sind aktuell zu vergeben:</h2>
-							<small>*(Alle Aufträge beziehen sich auf die gemachten Angaben der Kunden und sind ohne gewähr.)</small>
-
+						<h2>
+							Folgende Aufträge sind aktuell zu vergeben: <br /> <small>*(Alle Aufträge beziehen sich auf die gemachten Angaben der Kunden und sind ohne gewähr.)</small>
+						</h2>
 						<h:dataTable value="#{offerBean.allOrders}" var="order" class="table table-striped text-left">
 							<h:column>
 								<f:facet name="header">Auftragsnummer:</f:facet>#{order.id}
@@ -46,13 +46,17 @@
 										<f:facet name="header">PLZ / Ort</f:facet>#{adress.postcode} #{adress.country}
 			    					</h:column>
 								</h:dataTable>
-							</h:column>							
+							</h:column>
 							<h:column>
 								<f:facet name="header">Aktionen:</f:facet>
-								<h:link class="btn btn-primary btn-xs" outcome="./submitTender.xhtml" value="Angebot abgeben">
+								<h:link class="btn btn-primary btn-xs" rendered="#{not offerBean.checkIfLoggedInUserAlreadySubmitTender(order)}" outcome="./submitTender.xhtml" value="Angebot abgeben">
 									<f:param name="orderID" value="#{order.id}"></f:param>
 								</h:link>
-								<h:commandButton class="btn btn-info btn-xs" value="Angebot bearbeiten" />
+								<h:link class="btn btn-info btn-xs" rendered="#{offerBean.checkIfLoggedInUserAlreadySubmitTender(order) and not offerBean.checkIfOfferAlreadyAccepted(order)}" outcome="./submitTender.xhtml" value="Angebot bearbeiten">
+									<f:param name="orderID" value="#{order.id}"></f:param>
+								</h:link>
+								<h:commandButton value="Angebot stornieren" class="btn btn-danger btn-xs" rendered="#{offerBean.checkIfLoggedInUserAlreadySubmitTender(order)  and not offerBean.checkIfOfferAlreadyAccepted(order)}" action="#{offerBean.deleteOffer(order)}" />
+								<h:graphicImage library="resources" rendered="#{offerBean.checkIfOfferAlreadyAccepted(order)}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/agreement.png" alt="Angebot akzeptiert" /> 
 							</h:column>
 						</h:dataTable>
 

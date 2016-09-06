@@ -1,6 +1,7 @@
 package com.pascalstieber.mrlocksmith.offer;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,10 +27,21 @@ public class OfferEntity extends AbstractMRLSEntity{
     @ManyToOne
     private ContractorEntity contractor;
     
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="offer", fetch = FetchType.LAZY)
+    public ContractorEntity getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(ContractorEntity contractor) {
+        this.contractor = contractor;
+    }
+
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="offer", fetch = FetchType.LAZY, orphanRemoval = true)
     @OrderBy("id DESC")
     private List<ItemEntity> items = new ArrayList<>();
 
+    private boolean accepted = false;
+    private Date acceptedAt;
+    
     public OrderEntity getOrder() {
         return order;
     }
@@ -46,6 +58,24 @@ public class OfferEntity extends AbstractMRLSEntity{
         this.items.add(items);
     }
     
-    
+    public void removeItem(ItemEntity pItem){
+	this.items.remove(pItem);
+    }
+
+    public boolean isAccepted() {
+	return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+	this.accepted = accepted;
+    }
+
+    public Date getAcceptedAt() {
+	return acceptedAt;
+    }
+
+    public void setAcceptedAt(Date acceptedAt) {
+	this.acceptedAt = acceptedAt;
+    }
     
 }
