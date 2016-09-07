@@ -103,13 +103,13 @@
 						<div class="card-block">
 							<h4 class="card-title">Statistik</h4>
 							<p class="card-text">
-								letztes Angebot vermittelt: <span class="badge">30 Sekunden</span>
+								letztes Angebot vermittelt: <span class="badge">#{statisticBean.getLastAcceptedContract()}</span>
 							</p>
 							<p class="card-text">
-								Anfragen insgesamt: <span class="badge">3879</span>
+								Anfragen insgesamt: <span class="badge">#{statisticBean.getOrderAmount()}</span>
 							</p>
 							<p class="card-text">
-								vermittelte Angebote: <span class="badge">2912</span>
+								vermittelte Angebote: <span class="badge">#{statisticBean.getAmountAcceptedOffers()}</span>
 							</p>
 						</div>
 					</div>

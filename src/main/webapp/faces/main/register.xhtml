@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/faces/main/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<div class="jumbotron" style="background: #A9D0F5 !important">
+			<h:form>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="dropdown">
+							<button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
+								Registrieren als<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><h:commandLink value="Kunde" action="#{contractorBean.newCustomerOrContractor('customer')}" /></li>
+								<li><h:commandLink value="Dienstleister" action="#{contractorBean.newCustomerOrContractor('contractor')}" /></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

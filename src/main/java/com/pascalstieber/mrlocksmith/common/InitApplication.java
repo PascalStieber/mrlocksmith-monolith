@@ -10,8 +10,8 @@ import com.pascalstieber.mrlocksmith.contractor.ContractorEntity;
 import com.pascalstieber.mrlocksmith.user.UserDAO;
 import com.pascalstieber.mrlocksmith.user.UserEntity;
 
-@Startup
-@Singleton
+//@Startup
+//@Singleton
 public class InitApplication {
 
     private InitApplication() {
