@@ -14,31 +14,43 @@
 				<div class="row">
 
 					<h2>
-						Schritt 1 von 5: Welche Türe lässt sich nicht öffnen?<br/>
-						<small></small>
+						Schritt 1 von 5: Welche Türe lässt sich nicht öffnen?<br /> <small></small>
 					</h2>
 					<br /> <br />
-					<div class="col-md-6 text-right">
+					<div class="col-md-4 text-right">
 						<!--  click feeling -->
 						<h:commandLink>
 							<div class="btn btn-default">
 								<div class="card customMRLSMCard">
 									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.homeOrCar.equalsIgnoreCase('car') ? '#A9D0F5':'white' };">
-										<h:graphicImage library="resources" class="card-img-top" id="keyAvailable" value="/resources/img/icons/transport-1.png" alt="car">
+										<h:graphicImage library="resources" class="card-img-top" id="transport" value="/resources/img/icons/transport-1.png" alt="car">
 										</h:graphicImage>
 										<f:ajax id="car" listener="#{orderBean.order.setHomeOrCar('car')}" render="@form" execute="" update="@form" />
 									</div>
-
 									<div class="card-block">
 										<h4 class="card-title">Autotür öffnen</h4>
-										<p class="card-text"></p>
 									</div>
 								</div>
 							</div>
 						</h:commandLink>
 					</div>
-
-					<div class="col-md-6 text-left">
+					<div class="col-md-4 text-center">
+						<h:commandLink>
+							<div class="btn btn-default">
+								<div class="card customMRLSMCard">
+									<div style="margin-top:4px; border-radius:4px 4px 0 0; background: #{orderBean.order.homeOrCar.equalsIgnoreCase('garage') ? '#A9D0F5':'white' };">
+										<h:graphicImage library="resources" class="card-img-top" id="vehicle" value="/resources/img/icons/vehicle.png" alt="garage">
+										</h:graphicImage>
+										<f:ajax id="garage" listener="#{orderBean.order.setHomeOrCar('garage')}" render="@form" execute="" update="@form" />
+									</div>
+									<div class="card-block">
+										<h4 class="card-title">Garage öffnen</h4>
+									</div>
+								</div>
+							</div>
+						</h:commandLink>
+					</div>
+					<div class="col-md-4 text-left">
 
 						<!--  click feeling -->
 						<h:commandLink>
@@ -51,9 +63,8 @@
 									<f:ajax id="home" listener="#{orderBean.order.setHomeOrCar('home')}" render="@form" execute="" update="@form" />
 									<div class="card-block">
 										<h4 class="card-title">
-											Haustür öffnen <br /> <small></small>
+											Haustür öffnen
 										</h4>
-										<p class="card-text"></p>
 									</div>
 								</div>
 							</div>

@@ -21,6 +21,7 @@
 								<f:facet name="header">Zu öffnen ist:</f:facet>
 								<h:graphicImage library="resources" rendered="#{order.homeOrCar.equals('home')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/home-2.png" alt="Haustür" />
 								<h:graphicImage library="resources" rendered="#{order.homeOrCar.equals('car')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/transport-1.png" alt="Auto" />
+								<h:graphicImage library="resources" rendered="#{order.homeOrCar.equals('garage')}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/vehicle.png" alt="Garage" />
 							</h:column>
 							<h:column>
 								<f:facet name="header">Schlüssel vorhanden:</f:facet>
@@ -34,6 +35,7 @@
 							</h:column>
 							<h:column>
 								<f:facet name="header">Express erwünscht:</f:facet>
+
 								<span class="#{order.express ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'}"></span>
 							</h:column>
 							<h:column>
@@ -52,11 +54,14 @@
 								<h:link class="btn btn-primary btn-xs" rendered="#{not offerBean.checkIfLoggedInUserAlreadySubmitTender(order)}" outcome="./submitTender.xhtml" value="Angebot abgeben">
 									<f:param name="orderID" value="#{order.id}"></f:param>
 								</h:link>
-								<h:link class="btn btn-info btn-xs" rendered="#{offerBean.checkIfLoggedInUserAlreadySubmitTender(order) and not offerBean.checkIfOfferAlreadyAccepted(order)}" outcome="./submitTender.xhtml" value="Angebot bearbeiten">
+								<h:link class="btn btn-info btn-xs" rendered="#{offerBean.checkIfLoggedInUserAlreadySubmitTender(order) and not offerBean.checkIfOfferAlreadyAccepted(order)}" outcome="./submitTender.xhtml"
+									value="Angebot bearbeiten">
 									<f:param name="orderID" value="#{order.id}"></f:param>
 								</h:link>
-								<h:commandButton value="Angebot stornieren" class="btn btn-danger btn-xs" rendered="#{offerBean.checkIfLoggedInUserAlreadySubmitTender(order)  and not offerBean.checkIfOfferAlreadyAccepted(order)}" action="#{offerBean.deleteOffer(order)}" />
-								<h:graphicImage library="resources" rendered="#{offerBean.checkIfOfferAlreadyAccepted(order)}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/agreement.png" alt="Angebot akzeptiert" /> 
+								<h:commandButton value="Angebot stornieren" class="btn btn-danger btn-xs"
+									rendered="#{offerBean.checkIfLoggedInUserAlreadySubmitTender(order)  and not offerBean.checkIfOfferAlreadyAccepted(order)}" action="#{offerBean.deleteOffer(order)}" />
+								<h:graphicImage library="resources" rendered="#{offerBean.checkIfOfferAlreadyAccepted(order)}" styleClass="resizeImagesAsIcons" value="/resources/img/icons/agreement.png"
+									alt="Angebot akzeptiert" />
 							</h:column>
 						</h:dataTable>
 
