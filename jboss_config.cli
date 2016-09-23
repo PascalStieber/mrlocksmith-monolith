@@ -21,7 +21,7 @@ batch
 /subsystem=logging/logger=org.apache.catalina:add(category=org.apache.catalina,level=ALL)
 
 # change default http port
-/socket-binding-group=standard-sockets/socket-binding=http:write-attribute(name="port", value="8085")
+#/socket-binding-group=standard-sockets/socket-binding=http:write-attribute(name="port", value="8085")
 
 # change default console logger from info to trace
 /subsystem=logging/console-handler=CONSOLE:write-attribute(name=level,value=TRACE)
