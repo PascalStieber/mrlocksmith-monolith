@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,7 +28,7 @@ public class OrderBean implements Serializable {
     private AdressEntity adress;
     private OrderEntity order;
     private Long orderID;
-
+    private String loggedInUserName;
     private List<OrderEntity> allOrders;
 
     @Inject
@@ -44,7 +45,9 @@ public class OrderBean implements Serializable {
 	user = new UserEntity();
 	adress = new AdressEntity();
 	order = new OrderEntity();
-	allOrders = orderDAO.fetchAllOrders();
+	loggedInUserName = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().toString();
+	UserEntity loggedInUserInstance = userDAO.fetchUserByEmail(loggedInUserName);
+	allOrders = orderDAO.fetchAllOrdersByUserid(loggedInUserInstance);
     }
 
     public void fetchSelectedOrder() {
@@ -75,7 +78,8 @@ public class OrderBean implements Serializable {
 	offerToAccept.setAccepted(true);
 	offerToAccept.setAcceptedAt(new Date());
 	offerDAO.updateOffer(offerToAccept);
-	allOrders = orderDAO.fetchAllOrders();
+	UserEntity loggedInUserInstance = userDAO.fetchUserByEmail(loggedInUserName);
+	allOrders = orderDAO.fetchAllOrdersByUserid(loggedInUserInstance);
     }
 
     public String saveOrder() {

@@ -1,9 +1,11 @@
 package com.pascalstieber.mrlocksmith.item;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.pascalstieber.mrlocksmith.common.AbstractMRLSEntity;
@@ -14,7 +16,7 @@ public class ItemEntity extends AbstractMRLSEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     private OfferEntity offer;
 
     // Die Validierungen wurden in die GUI verlegt. Somit ist es möglich, Items

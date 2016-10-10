@@ -51,6 +51,27 @@ public class OrderDAO {
 	List<OrderEntity> result = q.getResultList();
 	return result;
     }
+    
+    
+    public List<OrderEntity> fetchAllOrdersByUserid(UserEntity Userid) {
+	EntityGraph<OrderEntity> orderGraph = em.createEntityGraph(OrderEntity.class);
+	// userEntityGrap.addAttributeNodes("id");
+	Subgraph<UserEntity> userGraph = orderGraph.addSubgraph("user", UserEntity.class);
+	Subgraph<AdressEntity> adressGraph = userGraph.addSubgraph("adresses", AdressEntity.class);
+	Subgraph<OfferEntity> offerGraph = orderGraph.addSubgraph("offers", OfferEntity.class);
+	Subgraph<ItemEntity> itemGraph = offerGraph.addSubgraph("items", ItemEntity.class);
+
+	// Das DISTINCT ist nötig, um keine redundanten Daten des orderGraphs
+	// als result zu erhalten. Dieses Problem scheint seinen Ursprung in dem
+	// tiefen EntityGraphen zu haben. Dazu gibt es bspw. auch ein JPA Jira
+	// Ticket: https://java.net/jira/browse/JPA_SPEC-96
+	Query q = em.createQuery("SELECT DISTINCT o FROM OrderEntity o WHERE o.user= :userid GROUP BY o.id");
+	q.setParameter("userid", Userid);
+	q.setHint("javax.persistence.fetchgraph", orderGraph);
+	q.setHint("javax.persistence.loadgraph", orderGraph);
+	List<OrderEntity> result = q.getResultList();
+	return result;
+    }
 
     public OrderEntity fetchOrderByID(Long pOrderid) {
 	EntityGraph<OrderEntity> orderGraph = em.createEntityGraph(OrderEntity.class);
